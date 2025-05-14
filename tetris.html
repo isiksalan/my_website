@@ -271,10 +271,7 @@
 <script>
 
 
-// Home button functionality
-document.getElementById('home-btn').addEventListener('click', function() {
-    window.location.href = 'index.html';
-  });
+
 // https://tetris.fandom.com/wiki/Tetris_Guideline
 
 // get a random integer between the range of [min,max]
@@ -414,7 +411,7 @@ function showGameOver() {
   context.globalAlpha = 1;
   context.fillStyle = 'white';
   
-  context.font = '36px Minecraft';
+  context.font = '36px monospace';
   context.textAlign = 'center';
   context.textBaseline = 'middle';
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
@@ -475,7 +472,7 @@ function drawHoldTetromino() {
   
   // Draw hold box title
   holdContext.fillStyle = 'white';
-  context.font = '12px Press Start 2P';
+  context.font = '12px monospace';
     holdContext.textAlign = 'center';
   holdContext.textBaseline = 'top';
   holdContext.fillText('HOLD', holdCanvas.width / 2, 5);
@@ -617,7 +614,7 @@ function togglePause() {
     context.globalAlpha = 1;
     context.fillStyle = 'white';
     
-    context.font = '36px Press Start 2P';
+    context.font = '36px monospace';
     context.textAlign = 'center';
     context.textBaseline = 'middle';
     context.fillText('PAUSED', canvas.width / 2, canvas.height / 2);
