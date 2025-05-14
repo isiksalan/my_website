@@ -241,7 +241,7 @@ h1 {
         display: flex;
         justify-content: center;
         width: 100%;
-        margin: 20px 0;
+        margin: 20px auto;
     }
 }
 

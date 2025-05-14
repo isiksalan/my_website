@@ -1,4 +1,4 @@
-
+@import url(https://fonts.googleapis.com/css?family=Bungee);
 
 /* Reset default margins and padding */
 body {
@@ -237,3 +237,102 @@ h1 {
     from {opacity: 0.7; transform: scale(0.9);}
     to {opacity: 1; transform: scale(1.1);}
 }
+
+
+button {
+    background-color: #e7b0dc;
+    border-radius: 50px;
+    color: #b50000;
+    border: 6px solid #fa00cc;
+    line-height: 1;
+    font-size: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    padding:  15px 20px;
+    font-family: 'Press Start 2P', cursive;
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    min-width: 200px;
+    text-align: center;
+}
+
+button:hover, button:focus {
+    -webkit-animation-name: wobble;
+    animation-name: wobble;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+}
+
+@-webkit-keyframes wobble {
+    16.65% {
+      -webkit-transform: translateX(8px);
+      transform: translateX(8px);
+    }
+    33.3% {
+      -webkit-transform: translateX(-6px);
+      transform: translateX(-6px);
+    }
+    49.95% {
+      -webkit-transform: translateX(4px);
+      transform: translateX(4px);
+    }
+    66.6% {
+      -webkit-transform: translateX(-2px);
+      transform: translateX(-2px);
+    }
+    83.25% {
+      -webkit-transform: translateX(1px);
+      transform: translateX(1px);
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+  @keyframes wobble {
+    16.65% {
+      -webkit-transform: translateX(8px);
+      transform: translateX(8px);
+    }
+    33.3% {
+      -webkit-transform: translateX(-6px);
+      transform: translateX(-6px);
+    }
+    49.95% {
+      -webkit-transform: translateX(4px);
+      transform: translateX(4px);
+    }
+    66.6% {
+      -webkit-transform: translateX(-2px);
+      transform: translateX(-2px);
+    }
+    83.25% {
+      -webkit-transform: translateX(1px);
+      transform: translateX(1px);
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+    }
+  }
+  
+
+  
+.tetris-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 30px; /* Adjust this value to control distance from bottom */
+    left: 0;
+    right: 0;
+    z-index: 100; /* Ensures it stays above other elements */
+}
+
+

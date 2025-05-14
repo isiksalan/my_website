@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Aaaaaaaaaaaaaaaaaaaaaaaaaaaa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <style>
+
+
+      
+  html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    
+    /* SVG Background configuration */
+    background-image: url('background-tetris.svg');
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center top;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+
+  .game-area {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .game-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  canvas {
+    border: 1px solid white;
+  }
+
+  #game {
+    background-color: #111;
+  }
+
+  #hold-box {
+    background-color: #111;
+    border: 1px solid white;
+    width: 100px;
+    height: 100px;
+  }
+
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  button {
+    background-color: #333;
+    color: white;
+    border: 1px solid white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #555;
+  }
+
+  .score-display {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: white;
+    background-color: rgba(155, 19, 96, 0.9);
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
+  .start-screen {
+    position: absolute;
+    top: center;
+    left: center;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(52, 97, 188, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+
+  .start-screen h1 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
+  .start-screen input {
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .start-screen button {
+    width: 300px;
+    padding: 15px;
+    font-size: 18px;
+  }
+
+  .leaderboard {
+    width: 300px;
+    background-color: #111;
+    border: 2px solid white;
+    padding: 10px;
+  }
+
+  .leaderboard h2 {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  .leaderboard ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .leaderboard li {
+    margin-bottom: 5px;
+    padding: 5px;
+    border-bottom: 1px solid #333;
+  }
+
+/* Add this to your style section */
+.header-btn {
+    /* Override any other positioning from btn classes */
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    
+    /* Make sure it scales appropriately */
+    width: auto;
+    max-width: 800px;
+    height: 40px;
+    
+    /* Ensure text fits */
+    font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+    white-space: nowrap;
+    
+    /* Keep z-index high to stay on top */
+    z-index: 1000;
+  }
+
+.btn {  
+    font-family: 'Press Start 2P', cursive;
+}  
+
+/* Hover effect for specific button types */
+.btn:hover .btn-slide-show-text1 {  
+    margin-left: 65px;
+}  
+
+/* 3D layered button styling */
+.btn-layered-3d {  
+    width: 300px;  
+    position: relative;  
+    display: inline-block;  
+    cursor: pointer;  
+    outline: none;  
+    border: 0px;  
+    vertical-align: middle;  
+    text-decoration: none;  
+    font-size: 1rem;  
+    font-family: 'Press Start 2P', cursive;  
+    font-weight: 600;  
+    text-transform: uppercase;  
+    padding: 1.15em 2em;  
+    border-radius: 0.75em;  
+    transform-style: preserve-3d;  
+    transition: transform 0.15s ease-out, background 0.15s ease-out;
+    box-sizing: border-box; /* Ensures padding is included in width/height */
+}  
+
+/* 3D effect for the button */
+.btn-layered-3d::before {  
+    position: absolute;  
+    content: "";  
+    width: 100%;  
+    height: 100%;  
+    inset: 0px;  
+    border-radius: inherit;  
+    transform: translate3d(0px, 0.75em, -1em); 
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}  
+
+/* Button hover effects */
+.btn-layered-3d:hover {
+    transform: translateY(0.25em);
+} 
+
+.btn-layered-3d:hover::before {
+    transform: translate3d(0px, 0.5em, -1em);
+} 
+
+/* Pink theme for the button */
+.btn-layered-3d--pink {
+    color: rgb(13, 77, 48);
+    background: rgb(233, 247, 236);
+    border: 2px solid rgb(59, 165, 84);
+}  
+
+.btn-layered-3d--pink::before {
+    background: rgb(158, 220, 172);
+    box-shadow: rgb(59, 165, 84) 0px 0px 0px 2px;
+}  
+  </style>
+</head>
+<body>
+<audio id="cheat-sound" src="music/yehaw.mp3" preload="auto"></audio>
+
+<button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
+    GO BACK HOME ? 
+</button>
+<div class="score-display" id="score-display">Points you have: 0</div>
+
+<div class="game-area">
+
+  <div class="leaderboard">
+    <h2>High Scores</h2>
+    <ul id="leaderboard-list">
+      <!-- High scores will be displayed here -->
+    </ul>
+  </div>
+  
+  <div class="game-container">
+    <canvas width="320" height="640" id="game"></canvas>
+    <canvas width="100" height="100" id="hold-box"></canvas>
+  </div>
+</div>
+
+<div class="controls">
+  <button id="restart-btn">Restart</button>
+  <button id="pause-btn">Pause</button>
+</div>
+
+<div class="start-screen" id="start-screen">
+  <h1>enter nickname to play</h1>
+  <input type="text" id="player-name" placeholder="ex: HadsizKovboy" maxlength="15">
+  <button id="start-btn">Start Game</button>
+</div>
+
+<script>
+
+
+// Home button functionality
+document.getElementById('home-btn').addEventListener('click', function() {
+    window.location.href = 'index.html';
+  });
+// https://tetris.fandom.com/wiki/Tetris_Guideline
+
+// get a random integer between the range of [min,max]
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// generate a new tetromino sequence
+function generateSequence() {
+  const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+
+  while (sequence.length) {
+    const rand = getRandomInt(0, sequence.length - 1);
+    const name = sequence.splice(rand, 1)[0];
+    tetrominoSequence.push(name);
+  }
+}
+
+// get the next tetromino in the sequence
+function getNextTetromino() {
+  if (tetrominoSequence.length === 0) {
+    generateSequence();
+  }
+
+  const name = tetrominoSequence.pop();
+  const matrix = tetrominos[name];
+
+  // I and O start centered, all others start in left-middle
+  const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
+
+  // I starts on row 21 (-1), all others start on row 22 (-2)
+  const row = name === 'I' ? -1 : -2;
+
+  return {
+    name: name,      // name of the piece (L, O, etc.)
+    matrix: matrix,  // the current rotation matrix
+    row: row,        // current row (starts offscreen)
+    col: col         // current col
+  };
+}
+
+// rotate an NxN matrix 90deg
+function rotate(matrix) {
+  const N = matrix.length - 1;
+  const result = matrix.map((row, i) =>
+    row.map((val, j) => matrix[N - j][i])
+  );
+
+  return result;
+}
+
+// check to see if the new matrix/row/col is valid
+function isValidMove(matrix, cellRow, cellCol) {
+  for (let row = 0; row < matrix.length; row++) {
+    for (let col = 0; col < matrix[row].length; col++) {
+      if (matrix[row][col] && (
+          // outside the game bounds
+          cellCol + col < 0 ||
+          cellCol + col >= playfield[0].length ||
+          cellRow + row >= playfield.length ||
+          // collides with another piece
+          playfield[cellRow + row][cellCol + col])
+        ) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
+// place the tetromino on the playfield
+function placeTetromino() {
+  for (let row = 0; row < tetromino.matrix.length; row++) {
+    for (let col = 0; col < tetromino.matrix[row].length; col++) {
+      if (tetromino.matrix[row][col]) {
+
+        // game over if piece has any part offscreen
+        if (tetromino.row + row < 0) {
+          return showGameOver();
+        }
+
+        playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
+      }
+    }
+  }
+
+  // check for line clears starting from the bottom and working our way up
+  let linesCleared = 0;
+  for (let row = playfield.length - 1; row >= 0; ) {
+    if (playfield[row].every(cell => !!cell)) {
+      // Increment lines cleared
+      linesCleared++;
+
+      // drop every row above this one
+      for (let r = row; r >= 0; r--) {
+        for (let c = 0; c < playfield[r].length; c++) {
+          playfield[r][c] = playfield[r-1][c];
+        }
+      }
+    }
+    else {
+      row--;
+    }
+  }
+
+  // Update score based on lines cleared
+  if (linesCleared > 0) {
+    score += linesCleared;
+    updateScoreDisplay();
+  }
+
+  tetromino = getNextTetromino();
+  
+  // Reset the hold used flag when a new piece is placed
+  holdUsed = false;
+}
+
+// Update the score display
+function updateScoreDisplay() {
+  document.getElementById('score-display').textContent = `Score: ${score}`;
+}
+
+// show the game over screen
+function showGameOver() {
+  cancelAnimationFrame(rAF);
+  gameOver = true;
+  rAF = null;
+
+  context.fillStyle = 'black';
+  context.globalAlpha = 0.75;
+  context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+
+  context.globalAlpha = 1;
+  context.fillStyle = 'white';
+  
+  context.font = '36px Minecraft';
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
+  
+  // Add score to leaderboard
+  addScoreToLeaderboard(playerName, score);
+}
+
+// Add score to leaderboard
+function addScoreToLeaderboard(name, score) {
+  if (!name) name = "Anonymous";
+  
+  // Get existing scores from localStorage or create empty array
+  let scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+  
+  // Add new score
+  scores.push({ name, score, date: new Date().toISOString() });
+  
+  // Sort scores by score (highest first)
+  scores.sort((a, b) => b.score - a.score);
+  
+  // Keep only top 10
+  scores = scores.slice(0, 10);
+  
+  // Save back to localStorage
+  localStorage.setItem('tetrisScores', JSON.stringify(scores));
+  
+  // Update displayed leaderboard
+  updateLeaderboard();
+}
+
+// Update the leaderboard display
+function updateLeaderboard() {
+  const leaderboardList = document.getElementById('leaderboard-list');
+  leaderboardList.innerHTML = '';
+  
+  // Get scores from localStorage
+  const scores = JSON.parse(localStorage.getItem('tetrisScores') || '[]');
+  
+  if (scores.length === 0) {
+    const li = document.createElement('li');
+    li.textContent = 'No scores yet!';
+    leaderboardList.appendChild(li);
+    return;
+  }
+  
+  // Add each score to the list
+  scores.forEach((scoreInfo, index) => {
+    const li = document.createElement('li');
+    li.textContent = `${index + 1}. ${scoreInfo.name}: ${scoreInfo.score}`;
+    leaderboardList.appendChild(li);
+  });
+}
+
+// Draw a tetromino in the hold box
+function drawHoldTetromino() {
+  holdContext.clearRect(0, 0, holdCanvas.width, holdCanvas.height);
+  
+  // Draw hold box title
+  holdContext.fillStyle = 'white';
+  context.font = '12px Press Start 2P';
+    holdContext.textAlign = 'center';
+  holdContext.textBaseline = 'top';
+  holdContext.fillText('HOLD', holdCanvas.width / 2, 5);
+  
+  if (heldTetromino) {
+    holdContext.fillStyle = colors[heldTetromino.name];
+    
+    // Calculate size and position for centering the tetromino
+    const matrix = heldTetromino.matrix;
+    const size = Math.min(
+      (holdCanvas.width - 20) / Math.max(matrix.length, matrix[0].length),
+      20
+    );
+    
+    const startX = (holdCanvas.width - matrix[0].length * size) / 2;
+    const startY = (holdCanvas.height - matrix.length * size) / 2 + 5;
+    
+    for (let row = 0; row < matrix.length; row++) {
+      for (let col = 0; col < matrix[row].length; col++) {
+        if (matrix[row][col]) {
+          holdContext.fillRect(
+            startX + col * size, 
+            startY + row * size, 
+            size - 1, 
+            size - 1
+          );
+        }
+      }
+    }
+  }
+}
+
+// Hold the current tetromino
+function holdTetromino() {
+  if (holdUsed || gameOver || paused) return;
+  //if (gameOver || paused) return;
+  if (heldTetromino) {
+    // Swap current with held
+    const temp = {
+      name: tetromino.name,
+      matrix: tetrominos[tetromino.name] // Reset rotation to default
+    };
+    
+    // Reset position of held piece when it becomes active
+    const matrix = heldTetromino.matrix;
+    const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
+    const row = heldTetromino.name === 'I' ? -1 : -2;
+    
+    tetromino = {
+      name: heldTetromino.name,
+      matrix: heldTetromino.matrix,
+      row: row,
+      col: col
+    };
+    
+    heldTetromino = temp;
+  } else {
+    // First hold - just store current and get a new one
+    heldTetromino = {
+      name: tetromino.name,
+      matrix: tetrominos[tetromino.name] // Reset rotation to default
+    };
+    tetromino = getNextTetromino();
+  }
+  
+  holdUsed = true;
+  drawHoldTetromino();
+}
+
+// Hard drop the tetromino all the way down
+function hardDrop() {
+  if (gameOver || paused) return;
+  
+  let row = tetromino.row;
+  
+  // Find the furthest valid position
+  while (isValidMove(tetromino.matrix, row + 1, tetromino.col)) {
+    row++;
+  }
+  
+  // Move to that position and place
+  tetromino.row = row;
+  placeTetromino();
+}
+
+// Restart the game
+function restartGame() {
+
+  if (score > 0 && !gameOver) {
+        addScoreToLeaderboard(playerName, score);
+  }
+  // Clear the playfield
+  for (let row = -2; row < 20; row++) {
+    for (let col = 0; col < 10; col++) {
+      playfield[row][col] = 0;
+    }
+  }
+  
+  // Reset game state
+  count = 0;
+  score = 0;
+  updateScoreDisplay();
+  tetrominoSequence.length = 0;
+  tetromino = getNextTetromino();
+  heldTetromino = null;
+  holdUsed = false;
+  gameOver = false;
+  
+  // If game was paused, unpause it
+  if (paused) {
+    togglePause();
+  } else if (!rAF) {
+    // If game was over, restart animation
+    rAF = requestAnimationFrame(loop);
+  }
+  
+  // Clear and redraw hold box
+  drawHoldTetromino();
+
+  
+}
+
+// Toggle game pause state
+function togglePause() {
+  if (gameOver) return;
+  
+  paused = !paused;
+  
+  if (paused) {
+    // Pause the game
+    cancelAnimationFrame(rAF);
+    rAF = null;
+    
+    // Show pause message
+    context.fillStyle = 'black';
+    context.globalAlpha = 0.75;
+    context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
+
+    context.globalAlpha = 1;
+    context.fillStyle = 'white';
+    
+    context.font = '36px Press Start 2P';
+    context.textAlign = 'center';
+    context.textBaseline = 'middle';
+    context.fillText('PAUSED', canvas.width / 2, canvas.height / 2);
+    
+    // Update button text
+    pauseBtn.textContent = 'Resume';
+  } else {
+    // Resume the game
+    rAF = requestAnimationFrame(loop);
+    pauseBtn.textContent = 'Pause';
+  }
+}
+
+// Start the game
+function startGame() {
+  // Get player name
+  playerName = document.getElementById('player-name').value.trim();
+  if (!playerName) playerName = "Player";
+  
+  // Hide start screen
+  document.getElementById('start-screen').style.display = 'none';
+  
+  // Reset everything
+  restartGame();
+  
+  // Start the game loop
+  if (!rAF) {
+    rAF = requestAnimationFrame(loop);
+  }
+}
+
+const canvas = document.getElementById('game');
+const context = canvas.getContext('2d');
+const holdCanvas = document.getElementById('hold-box');
+const holdContext = holdCanvas.getContext('2d');
+const grid = 32;
+const tetrominoSequence = [];
+
+// Buttons
+const restartBtn = document.getElementById('restart-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const startBtn = document.getElementById('start-btn');
+
+// Event listeners for buttons
+restartBtn.addEventListener('click', restartGame);
+pauseBtn.addEventListener('click', togglePause);
+startBtn.addEventListener('click', startGame);
+
+// New variables for hold functionality and game state
+let heldTetromino = null;
+let holdUsed = false;
+let paused = false;
+let gameOver = false;
+let score = 0;
+let playerName = "";
+let rAF = null;  // keep track of the animation frame so we can cancel it
+
+// Initialize the leaderboard
+updateLeaderboard();
+
+// keep track of what is in every cell of the game using a 2d array
+// tetris playfield is 10x20, with a few rows offscreen
+const playfield = [];
+
+// populate the empty state
+for (let row = -2; row < 20; row++) {
+  playfield[row] = [];
+
+  for (let col = 0; col < 10; col++) {
+    playfield[row][col] = 0;
+  }
+}
+
+// how to draw each tetromino
+const tetrominos = {
+  'I': [
+    [0,0,0,0],
+    [1,1,1,1],
+    [0,0,0,0],
+    [0,0,0,0]
+  ],
+  'J': [
+    [1,0,0],
+    [1,1,1],
+    [0,0,0],
+  ],
+  'L': [
+    [0,0,1],
+    [1,1,1],
+    [0,0,0],
+  ],
+  'O': [
+    [1,1],
+    [1,1],
+  ],
+  'S': [
+    [0,1,1],
+    [1,1,0],
+    [0,0,0],
+  ],
+  'Z': [
+    [1,1,0],
+    [0,1,1],
+    [0,0,0],
+  ],
+  'T': [
+    [0,1,0],
+    [1,1,1],
+    [0,0,0],
+  ]
+};
+
+// color of each tetromino
+const colors = {
+  'I': 'cyan',
+  'O': 'yellow',
+  'T': 'purple',
+  'S': 'green',
+  'Z': 'red',
+  'J': 'blue',
+  'L': 'orange'
+};
+
+let count = 0;
+let tetromino = getNextTetromino();
+
+// Initialize the hold box
+drawHoldTetromino();
+
+// game loop
+function loop() {
+  rAF = requestAnimationFrame(loop);
+  context.clearRect(0,0,canvas.width,canvas.height);
+
+  // draw the playfield
+  for (let row = 0; row < 20; row++) {
+    for (let col = 0; col < 10; col++) {
+      if (playfield[row][col]) {
+        const name = playfield[row][col];
+        context.fillStyle = colors[name];
+
+        // drawing 1 px smaller than the grid creates a grid effect
+        context.fillRect(col * grid, row * grid, grid-1, grid-1);
+      }
+    }
+  }
+
+  // draw the active tetromino
+  if (tetromino) {
+
+    // tetromino falls every 35 frames
+    if (++count > 35) {
+      tetromino.row++;
+      count = 0;
+
+      // place piece if it runs into anything
+      if (!isValidMove(tetromino.matrix, tetromino.row, tetromino.col)) {
+        tetromino.row--;
+        placeTetromino();
+      }
+    }
+
+    context.fillStyle = colors[tetromino.name];
+
+    for (let row = 0; row < tetromino.matrix.length; row++) {
+      for (let col = 0; col < tetromino.matrix[row].length; col++) {
+        if (tetromino.matrix[row][col]) {
+
+          // drawing 1 px smaller than the grid creates a grid effect
+          context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid-1, grid-1);
+        }
+      }
+    }
+  }
+}
+
+// Function to show red glow effect
+function showRedGlow() {
+    // Create glow element if it doesn't exist
+    if (!glowEffect) {
+      glowEffect = document.createElement('div');
+      glowEffect.style.position = 'absolute';
+      glowEffect.style.top = '0';
+      glowEffect.style.left = '0';
+      glowEffect.style.width = '100%';
+      glowEffect.style.height = '100%';
+      glowEffect.style.pointerEvents = 'none'; // Let clicks pass through
+      glowEffect.style.transition = 'opacity 1s ease-in-out';
+      document.body.appendChild(glowEffect);
+    }
+    
+    // Apply the glow effect
+    glowEffect.style.background = 'radial-gradient(circle, rgba(255,0,0,0.4) 0%, rgba(255,0,0,0) 70%)';
+    glowEffect.style.boxShadow = 'inset 0 0 50px red';
+    glowEffect.style.opacity = '1';
+    
+    // Remove after 1 second
+    setTimeout(function() {
+      glowEffect.style.opacity = '0';
+    }, 1000);
+  }
+
+  // Function to play cheat sound
+function playCheatSound() {
+    const sound = document.getElementById('cheat-sound');
+    
+    // Reset sound to beginning (in case it's already playing)
+    sound.currentTime = 0;
+    
+    // Set volume (0.0 to 1.0)
+    sound.volume = 0.5;
+    
+    // Play the sound
+    sound.play().catch(error => {
+      console.log("Audio playback failed:", error);
+      // Most browsers require user interaction before playing audio
+      // This error might happen if the user hasn't interacted with the page yet
+    });
+  }
+
+// Add this variable at the top with your other variables
+let sixSequence = 0;
+let glowEffect = null;
+// listen to keyboard events to move the active tetromino
+document.addEventListener('keydown', function(e) {
+  if (gameOver || paused) return;
+
+  // left and right arrow keys (move)
+  if (e.which === 37 || e.which === 39) {
+    const col = e.which === 37
+      ? tetromino.col - 1
+      : tetromino.col + 1;
+
+    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+      tetromino.col = col;
+    }
+  }
+
+  // up arrow key (rotate)
+  if (e.which === 38) {
+    const matrix = rotate(tetromino.matrix);
+    if (isValidMove(matrix, tetromino.row, tetromino.col)) {
+      tetromino.matrix = matrix;
+    }
+  }
+
+  // down arrow key (drop)
+  if(e.which === 40) {
+    const row = tetromino.row + 1;
+
+    if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
+      tetromino.row = row - 1;
+
+      placeTetromino();
+      return;
+    }
+
+    tetromino.row = row;
+  }
+  
+  // C key (hold)
+  if (e.key === 'c' || e.key === 'C') {
+    holdTetromino();
+  }
+  
+  // Space key (hard drop)
+  if (e.key === ' ' || e.keyCode === 32) {
+    hardDrop();
+  }
+  
+  // P key (pause)
+  if (e.key === 'p' || e.key === 'P') {
+    togglePause();
+  }
+
+  if (e.key === '6') {
+    sixSequence++;
+    if (sixSequence === 3) {
+      // Add 666 points
+      score += 666;
+      updateScoreDisplay();
+      // Create red glow effect
+      showRedGlow();
+        // Play the sound effect
+      playCheatSound();
+    
+      // Reset the counter
+      sixSequence = 0;
+    }
+  } else {
+    // Reset if any other key is pressed
+    sixSequence = 0;
+  }
+
+});
+
+// Don't start the game automatically - wait for start button press
+// rAF = requestAnimationFrame(loop);
+</script>
+</body>
+</html>
