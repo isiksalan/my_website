@@ -656,32 +656,10 @@ const tetrominoSequence = [];
 
 
 // Event listeners for buttons
+// Event listeners for buttons
 restartBtn.addEventListener('click', restartGame);
 pauseBtn.addEventListener('click', togglePause);
-
-// Direct onclick handler for start button
-document.getElementById('start-btn').onclick = function() {
-  console.log("Start button clicked");
-  startGame();
-};
-
-function startGame() {
-  console.log("Starting game...");
-  // Get player name
-  playerName = document.getElementById('player-name').value.trim();
-  if (!playerName) playerName = "Player";
-  
-  // Hide start screen
-  document.getElementById('start-screen').style.display = 'none';
-  
-  // Reset everything
-  restartGame();
-  
-  // Start the game loop
-  if (!rAF) {
-    rAF = requestAnimationFrame(loop);
-  }
-}
+startBtn.addEventListener('click', startGame);
 // New variables for hold functionality and game state
 let heldTetromino = null;
 let holdUsed = false;
