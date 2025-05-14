@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles-2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- PhotoSwipe CSS from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.8/photoswipe.min.css">
+</head>
+<body>
+    <!-- Fixed header with button -->
+    <div class="header-container">
+        <h1>i count photons hopefully</h1>
+        <div class="header-button-container">
+            <button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
+                Home
+            </button>
+        </div>
+    </div>
+
+    <!-- Content wrapper -->
+    <div class="content-wrapper">
+        <!-- Text block with emoji decorations -->
+        <div class="simple-text-container">
+            <div class="star-button-wrapper">
+                <span class="button-star">👾</span>
+                <p class="simple-text">blood carbon dioxide measuring is cool!</p>
+                <span class="button-star">👾</span>
+            </div>
+        </div>
+
+        <!-- Image Gallery -->
+        <div class="gallery-container">
+            <div id="my-gallery" class="pswp-gallery">
+                <!-- Gallery items -->
+                <a href="images/1.png" 
+                   data-pswp-width="1200" 
+                   data-pswp-height="800" 
+                   target="_blank">
+                    <img src="images/1.png" alt="Image 1" />
+                </a>
+                <a href="images/2.png" 
+                   data-pswp-width="1200" 
+                   data-pswp-height="800" 
+                   target="_blank">
+                    <img src="images/2.png" alt="Image 2" />
+                </a>
+                <a href="images/3.png" 
+                   data-pswp-width="1200" 
+                   data-pswp-height="800" 
+                   target="_blank">
+                    <img src="images/3.png" alt="Image 3" />
+                </a>
+            </div>
+        </div>
+
+        <!-- Scrollable button -->
+        <div class="scrollable-button-container">
+            <button class="btn btn-layered-3d btn-layered-3d--pink" onclick="window.location.href='index.html'">
+                go back Home page
+            </button>
+        </div>
+    </div>
+
+    <!-- PhotoSwipe scripts from CDN -->
+    <script type="module">
+        // Import from CDN
+        import PhotoSwipeLightbox from 'https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.8/photoswipe-lightbox.esm.min.js';
+        
+        const lightbox = new PhotoSwipeLightbox({
+            gallery: '#my-gallery',
+            children: 'a',
+            pswpModule: () => import('https://cdnjs.cloudflare.com/ajax/libs/photoswipe/5.3.8/photoswipe.esm.min.js')
+        });
+        
+        lightbox.init();
+    </script>
+</body>
+</html>

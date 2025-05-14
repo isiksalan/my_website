@@ -1,0 +1,239 @@
+
+
+/* Reset default margins and padding */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    
+    /* Use your SVG as background */
+    background-image: url('background.svg');
+    
+    /* Don't repeat the image */
+    background-repeat: no-repeat;
+    
+    /* Scale options - choose one of these: */
+    
+    /* Option 1: Cover the entire viewport (will crop if necessary) */
+    background-size: cover;
+    
+    /* Option 2: Scale to 100% width, height scales proportionally */
+    /* background-size: 100% auto; */
+    
+    /* Option 3: Scale to fit entirely within viewport */
+    /* background-size: contain; */
+    
+    /* Make sure the background stays fixed in position */
+    background-position: center top; /* Instead of center center */
+    
+    /* Optional: Keep background fixed when scrolling */
+    /* background-attachment: fixed; */
+}
+
+
+
+
+.header-container {
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0px;
+    /* Add these properties */
+    background-color: rgba(159, 228, 207, 0.8); /* Semi-transparent white */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    z-index: 100; /* Make sure it's above other elements */
+}
+
+/* Style for the heading text */
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1.5rem;
+    color: black;
+    /* Make sure the heading doesn't overflow on small screens */
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.btn {  
+    font-family: 'Press Start 2P', cursive;  
+    /*text-transform: uppercase;*/
+}  
+    
+.btn:hover .btn-slide-show-text1 {  
+    margin-left: 65px;
+}  
+
+.btn-layered-3d > ::before {  
+    box-sizing: border-box;}  
+    
+.btn-layered-3d {  
+    width: 180px;  
+    position: relative;  
+    display: inline-block;  
+    cursor: pointer;  
+    outline: none;  
+    border: 0px;  
+    vertical-align: middle;  
+    text-decoration: none;  
+    font-size: 1rem;  
+    font-family: 'Press Start 2P', cursive;  
+    font-weight: 600;  
+    text-transform: uppercase;  
+    padding: 1.15em 2em;  
+    border-radius: 0.75em;  
+    transform-style: preserve-3d;  
+    transition: transform 0.15s ease-out, 
+    background 0.15s ease-out;}  
+    
+.btn-layered-3d::before {  
+    position: absolute;  
+    content: "";  
+    width: 100%;  
+    height: 100%;  
+    inset: 0px;  
+    border-radius: inherit;  
+    transform: translate3d(0px, 0.75em, -1em); 
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;}  
+    
+
+.btn-layered-3d:hover {  transform: translateY(0.25em);} 
+.btn-layered-3d:hover::before {  transform: translate3d(0px, 0.5em, -1em);} 
+.btn-layered-3d--pink {  color: rgb(13, 77, 48);  background: rgb(233, 247, 236);  border: 2px solid rgb(59, 165, 84);}  
+.btn-layered-3d--pink::before {  background: rgb(158, 220, 172);  box-shadow: rgb(59, 165, 84) 0px 0px 0px 2px, #eca83cff 0px 0.625em 0px 0px;}  
+ 
+    /* Button container styling */
+.button-container {
+    /* Center the button container */
+    display: flex;
+    justify-content: center;
+    
+    /* Add space between header and button */
+    margin-top: 60px; /* Adjust this value to position it exactly where you want */
+    
+    /* Make sure it takes full width for proper centering */
+    width: 100%;
+    
+    /* Ensure it doesn't overlap with header */
+    position: relative;
+    z-index: 1;
+}
+ 
+/* Text frame container styling */
+.text-frame-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    margin-bottom: -40px;
+}
+
+/* Wrapper to position both frame and text */
+.frame-wrapper {
+    position: relative;
+    max-width: 70%;
+    width: 70%;
+    display: flex; /* Changed to flex to center the image */
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center vertically if needed */
+}
+
+/* The frame image - using percentages */
+.frame-image {
+    width: 35%; /* Your desired width */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+}
+
+/* Text that appears inside the frame */
+.frame-text {
+    position: absolute;
+    /* These next lines will position the text only over the image */
+    width: 35%; /* Match the image width can be 35 as well */ 
+    left: 50%;
+    transform: translateX(-50%); /* Center the text over the image */
+    
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Reduced padding to give more space for text */
+    box-sizing: border-box;
+    font-family: 'Press Start 2P', cursive;
+    
+    /* More aggressive responsive font sizing */
+    font-size: clamp(0.3rem, 1vw, 1rem); /* Smaller minimum and preferred values */
+    
+    color: white;
+    text-align: center;
+    
+    /* Ensure text wraps properly */
+    overflow-wrap: break-word;
+    word-break: break-word;
+    
+    /* Remove overflow hidden to prevent cutting */
+    overflow: visible;
+    
+    /* Add line height control for better text fit */
+    line-height: 1.2;
+}
+
+/* Make the Press Start 2P font more readable at small sizes */
+@media (max-width: 768px) {
+    .frame-text {
+        /* Increase letter spacing for better readability at small sizes */
+        letter-spacing: -0.05em;
+        /* Further reduce font size if needed */
+        font-size: clamp(0.35rem, 0.8vw, 0.8rem);
+        padding: 10px;
+    }
+}
+
+
+/* Simple text block styling */
+.simple-text-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.simple-text {
+    max-width: 70%;
+    width: 50%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(0.5rem, 1vw, 0.9rem);
+    line-height: 1.5;
+    text-align: center;
+    color: black;
+    background-color: rgba(244, 111, 146, 0.7);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Star button wrapper styling */
+.star-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between stars and button */
+}
+
+/* Star styling */
+.button-star {
+    font-size: 36px; /* Size of the star */
+    color: #ff0008; /* Gold/yellow color to match your button shadow */
+    /*text-shadow: 1px 1px 2px rgba(0,0,0,0.3); /* Optional: adds slight shadow */
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.8), 0 0 15px rgba(236, 168, 60, 0.7);
+
+    animation: twinkle 1.5s infinite alternate; /* Optional: makes stars twinkle */
+}
+
+/* Optional: Animation to make stars twinkle */
+@keyframes twinkle {
+    from {opacity: 0.7; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1.1);}
+}

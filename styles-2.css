@@ -1,0 +1,288 @@
+
+
+/* =========== CORE STYLES =========== */
+/* Reset default margins and padding */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    
+    /* SVG Background configuration */
+    background-image: url('background2.svg');
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center top;
+}
+
+/* =========== HEADER STYLES =========== */
+/* Fixed header with flex layout */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    position: fixed; /* Stays at the top when scrolling */
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 20px;
+    background-color: rgba(159, 228, 207, 0.8); /* Semi-transparent background */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    z-index: 100; /* Ensures header stays above other content */
+}
+
+/* Heading text styling */
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(0.8rem, 3vw, 1.5rem); /* Responsive font size */
+    color: black;
+    margin: 0;
+    max-width: 70%; /* Limit width to prevent overflow */
+    word-wrap: break-word;
+}
+
+/* Header button container */
+.header-button-container {
+    display: flex;
+    align-items: center ;
+}
+
+/* Smaller button style for the header */
+/* Smaller button style for the header */
+/* Smaller button style for the header */
+.header-btn {
+    width: auto;
+    max-width: 120px;
+    height: 40px; /* Fixed height */
+    padding: 0 0; /* Remove vertical padding, keep horizontal */
+    font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+    white-space: nowrap;
+    
+    /* Center alignment */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+
+}
+/* =========== CONTENT WRAPPER =========== */
+/* Container for all content below the header */
+.content-wrapper {
+    position: relative;
+    padding-top: 40px; /* Space for fixed header */
+    width: 100%;
+}
+
+/* =========== TEXT BLOCK STYLING =========== */
+/* Simple text container */
+.simple-text-container {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+/* Simple text block */
+.simple-text {
+    max-width: 70%;
+    width: 50%;
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(0.5rem, 1vw, 0.9rem);
+    line-height: 1.5;
+    text-align: left;
+    color: black;
+    background-color: rgba(244, 111, 146, 0.9); /* Pink background */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* =========== EMOJI DECORATION STYLING =========== */
+/* Star/emoji wrapper */
+.star-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px; /* Space between emojis and content */
+}
+
+/* Emoji styling */
+.button-star {
+    font-size: 36px;
+    color: #ff8400;
+    text-shadow: 3px 3px 5px rgba(0,0,0,0.8), 0 0 15px rgba(236, 168, 60, 0.7);
+    animation: twinkle 1.5s infinite alternate; /* Twinkling animation */
+}
+
+/* Animation for twinkling effect */
+@keyframes twinkle {
+    from {opacity: 0.7; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1.1);}
+}
+
+/* =========== BUTTON STYLING =========== */
+/* Basic button styling */
+.btn {  
+    font-family: 'Press Start 2P', cursive;
+}  
+
+/* Hover effect for specific button types */
+.btn:hover .btn-slide-show-text1 {  
+    margin-left: 65px;
+}  
+
+/* 3D layered button styling */
+.btn-layered-3d {  
+    width: 180px;  
+    position: relative;  
+    display: inline-block;  
+    cursor: pointer;  
+    outline: none;  
+    border: 0px;  
+    vertical-align: middle;  
+    text-decoration: none;  
+    font-size: 1rem;  
+    font-family: 'Press Start 2P', cursive;  
+    font-weight: 600;  
+    text-transform: uppercase;  
+    padding: 1.15em 2em;  
+    border-radius: 0.75em;  
+    transform-style: preserve-3d;  
+    transition: transform 0.15s ease-out, background 0.15s ease-out;
+    box-sizing: border-box; /* Ensures padding is included in width/height */
+}  
+
+/* 3D effect for the button */
+.btn-layered-3d::before {  
+    position: absolute;  
+    content: "";  
+    width: 100%;  
+    height: 100%;  
+    inset: 0px;  
+    border-radius: inherit;  
+    transform: translate3d(0px, 0.75em, -1em); 
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}  
+
+/* Button hover effects */
+.btn-layered-3d:hover {
+    transform: translateY(0.25em);
+} 
+
+.btn-layered-3d:hover::before {
+    transform: translate3d(0px, 0.5em, -1em);
+} 
+
+/* Pink theme for the button */
+.btn-layered-3d--pink {
+    color: rgb(13, 77, 48);
+    background: rgb(233, 247, 236);
+    border: 2px solid rgb(59, 165, 84);
+}  
+
+.btn-layered-3d--pink::before {
+    background: rgb(158, 220, 172);
+    box-shadow: rgb(59, 165, 84) 0px 0px 0px 2px;
+}  
+
+/* =========== BUTTON CONTAINERS =========== */
+/* Center-aligned button container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+/* Scrollable button container (not fixed) */
+.scrollable-button-container {
+    position: absolute; /* Absolute positioning within the content-wrapper */
+    top: 170px;  /* Position from the top of content-wrapper */
+    right: 100px;
+    z-index: 50; /* Lower than header but above most content */
+}
+
+/* Smaller button for right positioning */
+.scrollable-button-container .btn-layered-3d {
+    width: 120px; /* Smaller width */
+    padding: 0.8em 1.5em; /* Reduced padding */
+    font-size: 0.8rem; /* Smaller font */
+}
+
+/* =========== RESPONSIVE DESIGN =========== */
+/* Adjustments for small screens */
+@media (max-width: 600px) {
+    /* Stack header content on small screens */
+    .header-container {
+        flex-direction: column;
+        padding-bottom: 15px;
+    }
+    
+    .header-container h1 {
+        max-width: 100%;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    /* Adjust content positioning for taller header */
+    .simple-text-container {
+        margin-top: 110px;
+    }
+    
+    /* Reposition the scrollable button on small screens */
+    .scrollable-button-container {
+        position: relative;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 20px 0;
+    }
+}
+
+
+/* =========== GALLERY STYLES =========== */
+.gallery-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+
+.pswp-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 15px;
+}
+
+.pswp-gallery a {
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pswp-gallery a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.pswp-gallery img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .pswp-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
