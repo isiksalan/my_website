@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>my babes</title>
-    <link rel="icon" href="images/logo.svg" type="image/svg">
+    <link rel="icon" href="gifs/heart.gif" type="image/gif">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         * {
-            cursor: url('etc/cursor-index.gif'), auto;
+            cursor: url('gifs/heart.gif'), auto;
             font-family: 'Press Start 2P', cursive;
             box-sizing: border-box;
         }
@@ -732,15 +732,16 @@
             const loadingInterval = setInterval(() => {
                 if (width >= 100) {
                     clearInterval(loadingInterval);
+                    
                     // Shorter timeout (500ms instead of 1500ms)
                     setTimeout(() => {
                         loadingOverlay.style.opacity = '0';
                         setTimeout(() => {
                             loadingOverlay.style.display = 'none';
-                            // Start playing music when loading is done
                             playMusic();
-                        }, 1500);
-                    }, 1500);
+                            // Start playing music when loading is done
+                        },2000);
+                    }, 2000);
                 } else {
                     // Faster progress (15-25% increments instead of 0-10%)
                     width += 15 + Math.random() * 10;
