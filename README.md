@@ -35,5 +35,7 @@ Type 666 during the Tetris game for a surprise
 
 
 🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️
+---
 > "This site is currently under construction :))"
-🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️
+
+![Under construction](gifs/under-construction)
