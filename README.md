@@ -1,9 +1,10 @@
-# Description
+# My Y2K-Inspired Personal Website
 
-This website is a personal playground for me :) 
+## 📖 Description
+This website is a personal playground for me :)
 
 ## 🌟 Website Structure
-
+```
 ├── 📁 Root
 │   ├── 📄 index.html (MAIN PAGE)
 │   ├── 📄 styles.css
@@ -19,17 +20,19 @@ This website is a personal playground for me :)
     ├── 📁 images
     ├── 📁 gifs
     └── 📁 backgrounds
+```
 
 ## 🎮 Pages
+* **index.html**: Main landing page with navigation to other sections
+* **research.html**: Showcases my research on blood carbon dioxide measuring
+* **tetris.html**: A fully playable Tetris game with leaderboard functionality
+* **to-do.html**: A to-do list tracker with local storage
+* **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters
+* **my_babes.html**: [Your content here]
 
-- **index.html**: Main landing page with navigation to other sections
-- **research.html**: Showcases my research on blood carbon dioxide measuring
-- **tetris.html**: A fully playable Tetris game with leaderboard functionality
-- **to-do.html**: A to-do list tracker with local storage
-- **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters
-- **my_babes.html**: 
+## 🥚 Easter Eggs
+Type 666 during the Tetris game for a surprise effect (red glow and sound)
 
-##🥚 Easter Eggs
-Type 666 during the Tetris game for a surprise
+---
 
-"This site is currently under construction :))"
+> "This site is currently under construction :))"
