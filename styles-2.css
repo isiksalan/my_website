@@ -1,4 +1,13 @@
 
+    * {
+        cursor: url('etc/cursor-index.gif'), auto;
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+    }
+
+    *:active {
+        cursor: url('etc/cursor-index.gif'), auto !important;
+    }
 
 /* =========== CORE STYLES =========== */
 /* Reset default margins and padding */

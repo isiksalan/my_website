@@ -1,4 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Bungee);
+    * {
+        cursor: url('etc/cursor-index.gif'), auto;
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+    }
+
+    *:active {
+        cursor: url('etc/cursor-index.gif'), auto !important;
+    }
 
 /* Reset default margins and padding */
 body {
@@ -30,20 +39,11 @@ body {
     /* background-attachment: fixed; */
 }
 
-
-#center-gif {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 50; /* This will place it above the game but below the start screen */
-  pointer-events: none; /* This makes it so clicks pass through the GIF */
+.centered-image {
+    text-align: center;
+    position: center;
 }
 
-#center-gif img {
-  max-width: 400px; /* Adjust size as needed */
-  max-height: 400px;
-}
 
 .header-container {
     text-align: center;
@@ -98,7 +98,7 @@ h1 {
     transform-style: preserve-3d;  
     transition: transform 0.15s ease-out, 
     background 0.15s ease-out;}  
-    
+
 .btn-layered-3d::before {  
     position: absolute;  
     content: "";  
@@ -108,37 +108,58 @@ h1 {
     border-radius: inherit;  
     transform: translate3d(0px, 0.75em, -1em); 
     transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;}  
-    
 
+    
 .btn-layered-3d:hover {  transform: translateY(0.25em);} 
 .btn-layered-3d:hover::before {  transform: translate3d(0px, 0.5em, -1em);} 
 .btn-layered-3d--pink {  color: rgb(13, 77, 48);  background: rgb(233, 247, 236);  border: 2px solid rgb(59, 165, 84);}  
 .btn-layered-3d--pink::before {  background: rgb(158, 220, 172);  box-shadow: rgb(59, 165, 84) 0px 0px 0px 2px, #eca83cff 0px 0.625em 0px 0px;}  
- 
     /* Button container styling */
 .button-container {
     /* Center the button container */
     display: flex;
     justify-content: center;
-    
     /* Add space between header and button */
     margin-top: 60px; /* Adjust this value to position it exactly where you want */
-    
     /* Make sure it takes full width for proper centering */
     width: 100%;
-    
     /* Ensure it doesn't overlap with header */
     position: relative;
     z-index: 1;
 }
- 
-/* Text frame container styling */
+/* Update the text frame container with minimal gap */
 .text-frame-container {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 80px;
     margin-bottom: -40px;
+    gap: 0; /* Remove the gap completely */
+}
+
+/* Side GIF styling - make them snug against the frame */
+.side-gif {
+    width: 100px; /* Slightly smaller size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0; /* Remove any margin */
+    padding: 0; /* Remove any padding */
+}
+
+/* Add negative margin to pull GIFs closer to frame if needed */
+.side-gif.left {
+    margin-right: -10px; /* Pull right side of left GIF closer */
+}
+
+.side-gif.right {
+    margin-left: -10px; /* Pull left side of right GIF closer */
+}
+
+.side-gif img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Wrapper to position both frame and text */
@@ -220,7 +241,7 @@ h1 {
     line-height: 1.5;
     text-align: center;
     color: black;
-    background-color: rgba(244, 111, 146, 0.7);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

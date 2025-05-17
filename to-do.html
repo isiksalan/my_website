@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to-do </title>
+    <link rel="icon" href="images/logo.svg" type="image/svg">
+    <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    * {
+        cursor: url('etc/10553a.gif'), auto;
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+    }
+
+    *:active {
+        cursor: url('etc/1869a.gif'), auto !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #f5f5dc; /* Fallback color */
+        background-image: url("backgrounds/back-290.gif");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+    }
+
+    /* New container for the tasks layout */
+    .tasks-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 1000px;
+        position: relative;
+        margin-top: 70px; /* Give space for the fixed header */
+    }
+
+    .notebook-container {
+        width: 70%;
+        max-width: 600px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-height: 80vh;
+        overflow-y: auto;
+        margin-right: 20px;
+    }
+
+    /* Achieved tasks container now on the right */
+    .achieved-container {
+        width: 30%;
+        max-width: 400px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-height: 70vh; /* Smaller height than the to-do list */
+        overflow-y: auto;
+        position: relative;
+        top: 0px; /* No offset */
+        background-image: url("background-achieved.gif");
+        background-repeat: repeat;
+        background-size: auto;
+    }
+
+    .todo-header {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .todo-input-container {
+        display: flex;
+        margin-bottom: 20px;
+    }
+
+    /* Input field styling */
+    #todo-input {
+        flex: 1;
+        padding: 10px;
+        border: 2px inset #ccc;
+        border-radius: 5px 0 0 5px;
+        font-size: 12px;
+        font-family: 'Press Start 2P', cursive;
+        background-color: #fff;
+        color: #000;
+        box-shadow: inset 2px 2px 3px rgba(0,0,0,0.2);
+    }
+    
+    #todo-input:focus {
+        background-color: #f0f8ff;
+        border-color: #4169e1;
+        outline: none;
+    }
+
+    #add-button {
+        background: linear-gradient(to bottom, #7cfc00, #32cd32);
+        color: #000;
+        font-weight: bold;
+        border: 3px solid;
+        border-color: #fff #666 #666 #fff;
+        border-radius: 8px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 0.7rem;
+        font-family: 'Press Start 2P', cursive;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.4);
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    #add-button:hover {
+        background: linear-gradient(to bottom, #90ee90, #3cb371);
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+    
+    #add-button:active {
+        border-color: #666 #fff #fff #666;
+        background: linear-gradient(to bottom, #32cd32, #228b22);
+        transform: translateY(2px);
+    }
+
+    .todo-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .todo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        border-left: 4px solid #4caf50;
+    }
+
+    .todo-text {
+        flex: 1;
+        font-size: 0.8rem;
+    }
+
+    .button-container {
+        display: flex;
+        gap: 5px;
+    }
+
+    .done-button {
+        background: linear-gradient(to bottom, #00bfff, #1e90ff);
+        color: white;
+        font-weight: bold;
+        border: 3px solid;
+        border-color: #fff #666 #666 #fff;
+        border-radius: 8px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.6rem;
+        text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .done-button:hover {
+        background: linear-gradient(to bottom, #4169e1, #0000cd);
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+    
+    .done-button:active {
+        border-color: #666 #fff #fff #666;
+        background: linear-gradient(to bottom, #1e90ff, #104e8b);
+        transform: translateY(2px);
+    }
+
+    .delete-button {
+        background: linear-gradient(to bottom, #ff6347, #cd5c5c);
+        color: white;
+        font-weight: bold;
+        border: 3px solid;
+        border-color: #fff #666 #666 #fff;
+        border-radius: 8px;
+        padding: 5px 10px;
+        cursor: pointer;
+        font-family: 'Press Start 2P', cursive;
+        font-size: 0.6rem;
+        text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+        box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    }
+
+    .delete-button:hover {
+        background: linear-gradient(to bottom, #ff4500, #b22222);
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+    }
+    
+    .delete-button:active {
+        border-color: #666 #fff #fff #666;
+        background: linear-gradient(to bottom, #cd5c5c, #8b3a3a);
+        transform: translateY(2px);
+    }
+
+    .completed {
+        text-decoration: line-through;
+        opacity: 0.7;
+        border-left-color: #9e9e9e;
+    }
+    
+    .achieved-header {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #555;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 5px;
+        border-radius: 5px;
+    }
+    
+    /* Style for the heading with tiny GIFs */
+    .title-with-gifs {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .tiny-gif {
+        width: 24px;
+        height: 24px;
+        image-rendering: pixelated; /* Makes pixel art GIFs look sharper */
+    }
+    
+    .achieved-list {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .achieved-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: rgba(240, 240, 240, 0.8);
+        border-radius: 5px;
+        border-left: 4px solid #9e9e9e;
+        color: #555;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        position: fixed; /* Stays at the top when scrolling */
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 20px;
+        background-color: rgba(159, 228, 207, 0.8); /* Semi-transparent background */
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+        z-index: 100; /* Ensures header stays above other content */
+    }
+
+    /* Heading text styling */
+    h1 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: clamp(0.8rem, 3vw, 1.5rem); /* Responsive font size */
+        color: black;
+        margin: 0;
+        max-width: 70%; /* Limit width to prevent overflow */
+        word-wrap: break-word;
+    }
+
+    h2 {
+        font-size: clamp(0.6rem, 2vw, 1rem);
+    }
+
+    /* Header button container */
+    .header-button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-btn {
+        width: auto;
+        max-width: 120px;
+        height: 40px; /* Fixed height */
+        padding: 0 15px; /* Horizontal padding only */
+        font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+        white-space: nowrap;
+        
+        /* Center alignment */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn {  
+        font-family: 'Press Start 2P', cursive;
+    }  
+
+    /* Hover effect for specific button types */
+    .btn:hover .btn-slide-show-text1 {  
+        margin-left: 65px;
+    }  
+
+    /* 3D layered button styling for the Y2K era */
+    .btn-layered-3d {  
+        width: 180px;  
+        position: relative;  
+        display: inline-block;  
+        cursor: pointer;  
+        outline: none;
+        vertical-align: middle;  
+        text-decoration: none;  
+        font-size: 0.9rem;  
+        font-family: 'Press Start 2P', cursive;  
+        font-weight: 600;  
+        text-transform: uppercase;  
+        padding: 0.8em 1.5em;  
+        border-radius: 10px;  
+        background: linear-gradient(to bottom, #f0f9ff, #c9e9ff);
+        border: 3px solid;
+        border-color: #fff #999 #999 #fff;
+        color: #003366;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            3px 3px 5px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+        transition: all 0.2s ease;
+    }
+
+    /* Button hover effects */
+    .btn-layered-3d:hover {
+        background: linear-gradient(to bottom, #e1f5fe, #81d4fa);
+        transform: translateY(-2px);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            4px 4px 8px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+    } 
+    
+    .btn-layered-3d:active {
+        background: linear-gradient(to bottom, #c9e9ff, #a1c4fd);
+        border-color: #999 #fff #fff #999;
+        transform: translateY(3px);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            1px 1px 2px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+    }
+
+    /* Pink theme for the button - more Y2K style */
+    .btn-layered-3d--pink {
+        background: linear-gradient(to bottom, #ffc0cb, #ff69b4);
+        color: #800080;
+        border-color: #fff #c71585 #c71585 #fff;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+    }  
+
+    .btn-layered-3d--pink:hover {
+        background: linear-gradient(to bottom, #ffb6c1, #ff1493);
+    }
+    
+    .btn-layered-3d--pink:active {
+        background: linear-gradient(to bottom, #ff69b4, #c71585);
+        border-color: #c71585 #fff #fff #c71585;
+    }  
+
+    /* Responsive design for smaller screens */
+    @media (max-width: 768px) {
+        .tasks-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .notebook-container {
+            width: 90%;
+            max-width: none;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+        
+        .achieved-container {
+            width: 90%;
+            max-width: none;
+            top: 0;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Fixed header with button -->
+    <div class="header-container">
+        <h1>my own to-do list</h1>
+        <div class="header-button-container">
+            <button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
+                Home
+            </button>
+        </div>
+    </div>
+
+    <!-- New container for the side-by-side layout -->
+    <div class="tasks-container">
+        <!-- To-do list container -->
+        <div class="notebook-container">
+            <div class="todo-header">
+                <div class="title-with-gifs">
+                    <img src="gifs/colorful-stars.gif" alt="✨" class="tiny-gif">
+                    <h1>My To-Do List</h1>
+                    <img src="gifs/colorful-stars.gif" alt="✨" class="tiny-gif">
+                </div>
+            </div>
+            <div class="todo-input-container">
+                <input type="text" id="todo-input" placeholder="Add a new task...">
+                <button id="add-button">Add</button>
+            </div>
+            <ul class="todo-list" id="todo-list">
+                <!-- To-do items will be added here -->
+            </ul>
+        </div>
+        
+        <!-- Achieved tasks container, now positioned to the right -->
+        <div class="achieved-container">
+            <div class="achieved-header">
+                <div class="title-with-gifs">
+                    <img src="gifs/cute-bubble-star.gif" alt="✨" class="tiny-gif">
+                    <h2>Achieved Tasks</h2>
+                    <img src="gifs/cute-bubble-star.gif" alt="✨" class="tiny-gif">
+                </div>
+            </div>
+            <ul class="achieved-list" id="achieved-list">
+                <!-- Achieved items will be added here -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the background image for the body
+            const setBackgroundImage = () => {
+                document.body.style.backgroundImage = 'url("backgrounds/back-290.gif")';
+                document.body.style.backgroundRepeat = 'repeat';
+                document.body.style.backgroundSize = 'auto';
+            };
+            
+            setBackgroundImage();
+            
+            const todoInput = document.getElementById('todo-input');
+            const addButton = document.getElementById('add-button');
+            const todoList = document.getElementById('todo-list');
+            const achievedList = document.getElementById('achieved-list');
+            
+            // Load saved data from localStorage
+            const loadData = () => {
+                const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
+                savedTodos.forEach(todo => {
+                    addTodoToDOM(todo.text);
+                });
+                
+                const savedAchieved = JSON.parse(localStorage.getItem('achieved') || '[]');
+                savedAchieved.forEach(item => {
+                    addToAchievedList(item.text);
+                });
+            };
+            
+            // Save to-dos to localStorage
+            const saveData = () => {
+                const todos = Array.from(todoList.children).map(item => {
+                    return {
+                        text: item.querySelector('.todo-text').textContent
+                    };
+                });
+                localStorage.setItem('todos', JSON.stringify(todos));
+                
+                const achieved = Array.from(achievedList.children).map(item => {
+                    return {
+                        text: item.querySelector('.todo-text').textContent
+                    };
+                });
+                localStorage.setItem('achieved', JSON.stringify(achieved));
+            };
+            
+            // Add a new to-do item to the DOM
+            const addTodoToDOM = (text) => {
+                const todoItem = document.createElement('li');
+                todoItem.className = 'todo-item';
+                
+                const todoText = document.createElement('span');
+                todoText.className = 'todo-text';
+                todoText.textContent = text;
+                
+                const buttonContainer = document.createElement('div');
+                buttonContainer.className = 'button-container';
+                
+                const doneButton = document.createElement('button');
+                doneButton.className = 'done-button';
+                doneButton.textContent = 'Done';
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Delete';
+                
+                buttonContainer.appendChild(doneButton);
+                buttonContainer.appendChild(deleteButton);
+                
+                todoItem.appendChild(todoText);
+                todoItem.appendChild(buttonContainer);
+                todoList.appendChild(todoItem);
+                
+                // Add event listeners
+                doneButton.addEventListener('click', () => {
+                    // Move to achieved list
+                    todoList.removeChild(todoItem);
+                    addToAchievedList(text);
+                    saveData();
+                });
+                
+                deleteButton.addEventListener('click', () => {
+                    todoList.removeChild(todoItem);
+                    saveData();
+                });
+            };
+            
+            // Add an item to the achieved list
+            const addToAchievedList = (text) => {
+                const achievedItem = document.createElement('li');
+                achievedItem.className = 'achieved-item';
+                
+                const achievedText = document.createElement('span');
+                achievedText.className = 'todo-text';
+                achievedText.textContent = text;
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'delete-button';
+                deleteButton.textContent = 'Remove';
+                
+                achievedItem.appendChild(achievedText);
+                achievedItem.appendChild(deleteButton);
+                achievedList.appendChild(achievedItem);
+                
+                // Add event listener for delete
+                deleteButton.addEventListener('click', () => {
+                    achievedList.removeChild(achievedItem);
+                    saveData();
+                });
+            };
+            
+            // Add new to-do when Add button is clicked
+            addButton.addEventListener('click', () => {
+                const text = todoInput.value.trim();
+                if (text) {
+                    addTodoToDOM(text);
+                    todoInput.value = '';
+                    saveData();
+                }
+            });
+            
+            // Add new to-do when Enter key is pressed
+            todoInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const text = todoInput.value.trim();
+                    if (text) {
+                        addTodoToDOM(text);
+                        todoInput.value = '';
+                        saveData();
+                    }
+                }
+            });
+            
+            // Load saved data when page loads
+            loadData();
+        });
+    </script>
+</body>
+</html>
