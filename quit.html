@@ -300,7 +300,7 @@
 
     .cig-butt {
         position: absolute;
-        width: 25px;
+        width: 70px;
         height: auto;
         z-index: 5;
     }
@@ -557,7 +557,7 @@
                 const scalingFactor = 20; // Show 1 butt per 20 cigarettes
                 
                 // Calculate how many to show, with a reasonable maximum to prevent performance issues
-                const maxCigsToShow = 150; // Cap to prevent overwhelming the page
+                const maxCigsToShow = 250; // Cap to prevent overwhelming the page
                 const cigsToShow = Math.min(Math.ceil(cigarettesNotSmoked / scalingFactor), maxCigsToShow);
                 
                 // Update the label to explain the visualization
