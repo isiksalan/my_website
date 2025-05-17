@@ -462,7 +462,7 @@
             // Set the date you quit smoking (Year, Month-1, Day)
             const quitDate = new Date(2025, 0, 6); // January 6, 2025 - CHANGE THIS!
             const cigarettesPerDay = 20;
-            const cigaretteCost = 0.50; // Cost per cigarette in dollars
+            const cigaretteCost = 0.33; // Cost per cigarette in dollars
             
        
             // Achievement milestones
@@ -557,7 +557,7 @@
                 const scalingFactor = 20; // Show 1 butt per 20 cigarettes
                 
                 // Calculate how many to show, with a reasonable maximum to prevent performance issues
-                const maxCigsToShow = 300; // Cap to prevent overwhelming the page
+                const maxCigsToShow = 150; // Cap to prevent overwhelming the page
                 const cigsToShow = Math.min(Math.ceil(cigarettesNotSmoked / scalingFactor), maxCigsToShow);
                 
                 // Update the label to explain the visualization
