@@ -28,17 +28,64 @@ body {
     position: center;
 }
 
+
 .header-container {
-    text-align: center;
-    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Keep it fixed at the top */
     top: 0;
     left: 0;
     right: 0;
-    padding: 0px;
-    /* Add these properties */
-    background-color: rgba(159, 228, 207, 0.8); /* Semi-transparent white */
+    padding: 10px 20px;
+    background-color: rgba(159, 228, 207, 0.8); /* Semi-transparent background */
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08); /* Subtle shadow */
     z-index: 100; /* Make sure it's above other elements */
+    text-align: center;
+}
+
+/* Center the h1 while making room for the icon */
+.header-container h1 {
+    margin: 0 auto;
+    text-align: center;
+    max-width: calc(100% - 80px);
+    font-size: 1.5rem;
+    color: black;
+    word-wrap: break-word;
+}
+
+/* Quit link styling */
+.quit-link {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.quit-icon {
+    width: 40px;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.quit-icon:hover {
+    transform: scale(1.2);
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+    from {opacity: 0.8;}
+    to {opacity: 1; transform: scale(1.3);}
+}
+
+/* Right side GIF styling */
+.side-gif.right {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+/* Clean up text container spacing */
+.simple-text-wrapper {
+    margin-top: 20px;
 }
 
 /* Style for the heading text */
