@@ -17,7 +17,7 @@ body {
     min-height: 100vh;
     
     /* SVG Background configuration */
-    background-image: url('background2.svg');
+    background-image: url('backgrounds/background2.svg');
     background-repeat: no-repeat;
     background-size: cover; /* Cover the entire viewport */
     background-position: center top;
