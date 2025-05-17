@@ -1,17 +1,35 @@
-This is my hobby project and nothing else :)) 
+# Description
 
-current structure of the website : 
+This website is a personal playground for me :) 
 
-|
-|
-|________index.html - styles.css
-        |
-        |____________ research.html - styles2.css
-        |____________ tetris.html
-        |____________ quit.html
-        |____________ my_babes.html
+## 🌟 Website Structure
 
+├── 📁 Root
+│   ├── 📄 index.html (MAIN PAGE)
+│   ├── 📄 styles.css
+│   │
+│   ├── 📄 research.html
+│   ├── 📄 styles2.css
+│   ├── 📄 tetris.html
+│   ├── 📄 to-do.html
+│   ├── 📄 quit-smoking.html
+│   └── 📄 my_babes.html
+│
+└── 📁 assets
+    ├── 📁 images
+    ├── 📁 gifs
+    └── 📁 backgrounds
 
+## 🎮 Pages
 
-easter eggs:
-*666 in tetris
+- **index.html**: Main landing page with navigation to other sections
+- **research.html**: Showcases my research on blood carbon dioxide measuring
+- **tetris.html**: A fully playable Tetris game with leaderboard functionality
+- **to-do.html**: A to-do list tracker with local storage
+- **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters
+- **my_babes.html**: 
+
+##🥚 Easter Eggs
+Type 666 during the Tetris game for a surprise
+
+"This site is currently under construction :))"
