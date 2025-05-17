@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quit journey</title>
+    <link rel="icon" href="images/logo.gif" type="image/gif">
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    * {
+        cursor: url('etc/cursor-index.gif'), auto;
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+    }
+
+    *:active {
+        cursor: url('etc/cursor-index.gif'), auto !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #8511a1;
+        background-image: url("backgrounds/back-040.gif");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        position: relative;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 20px;
+
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+        z-index: 100;
+    }
+
+    h1 {
+        font-size: clamp(0.8rem, 3vw, 1.5rem);
+        color: rgb(255, 255, 255);
+        margin: 0;
+        max-width: 70%;
+        word-wrap: break-word;
+    }
+
+    h2 {
+        font-size: clamp(0.6rem, 2vw, 1rem);
+    }
+
+    .header-button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-btn {
+        width: auto;
+        max-width: 120px;
+        height: 40px;
+        padding: 0 15px;
+        font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn {  
+        font-family: 'Press Start 2P', cursive;
+    }  
+
+    .btn:hover .btn-slide-show-text1 {  
+        margin-left: 65px;
+    }  
+
+    .btn-layered-3d {  
+        width: 180px;  
+        position: relative;  
+        display: inline-block;  
+        cursor: pointer;  
+        outline: none;
+        vertical-align: middle;  
+        text-decoration: none;  
+        font-size: 0.9rem;  
+        font-weight: 600;  
+        text-transform: uppercase;  
+        padding: 0.8em 1.5em;  
+        border-radius: 10px;  
+        background: linear-gradient(to bottom, #f0f9ff, #c9e9ff);
+        border: 3px solid;
+        border-color: #fff #999 #999 #fff;
+        color: #003366;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            3px 3px 5px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+        transition: all 0.2s ease;
+    }
+
+    .btn-layered-3d:hover {
+        background: linear-gradient(to bottom, #e1f5fe, #81d4fa);
+        transform: translateY(-2px);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            4px 4px 8px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+    } 
+    
+    .btn-layered-3d:active {
+        background: linear-gradient(to bottom, #c9e9ff, #a1c4fd);
+        border-color: #999 #fff #fff #999;
+        transform: translateY(3px);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            1px 1px 2px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+    }
+
+    .btn-layered-3d--pink {
+        background: linear-gradient(to bottom, #397ce2, #427ecc);
+        color: #ffe600d0;
+        border-color: #fff #5915c7 #1595c7 #fff;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+    }  
+
+    .btn-layered-3d--pink:hover {
+        background: linear-gradient(to bottom, #2bafc0, #1814ff);
+    }
+    
+    .btn-layered-3d--pink:active {
+        background: linear-gradient(to bottom, #6985ff, #15c79a);
+        border-color: #15c78c #fff #fff #047225;
+    }  
+
+    .main-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 80px auto 20px auto;
+        padding: 20px;
+        background-image: url('backgrounds/back-047.gif');
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        border-radius: 10px;
+        border: 3px dotted;
+        border-color: #fff #eeff00 #e7aa00 #fff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 10;
+    }
+
+    .title-box {
+    width: auto; /* Not 100% */
+    display: inline-block; /* Only as wide as needed */
+    margin: 20px auto; /* Center it */
+    background-image: url('backgrounds/back-229.gif');
+    background-repeat: repeat;
+    background-size: auto;
+    background-position: center;
+    padding: 20px; /* Padding between background edge and text box */
+    border-radius: 5px; /* Optional: rounded corners for the background area */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for the whole container */
+    
+    }
+
+    .title-text {
+        color: black;
+        background-color: white;
+        padding: 5px; /* Padding between background edge and text box */
+
+        }
+    .counter-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .counter-box {
+        background-color: rgba(117, 0, 0, 0.40);
+        border-radius: 8px;
+        padding: 15px;
+        color: rgb(200, 255, 0);
+        text-align: center;
+        border: 3px dotted #fbff02;
+        box-shadow: 0 0 10px rgb(248, 149, 0);
+    }
+
+    .counter-title {
+        font-size: 0.7rem;
+        margin-bottom: 10px;
+    }
+
+    .counter-value {
+        font-size: 1.2rem;
+        margin: 0;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .milestones {
+        
+        background-image: url("backgrounds/back-229.gif");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    .milestone-title {
+        text-align: center;
+        color: rgb(0, 0, 0);
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+    }
+
+    .milestone-grid {
+        background-image: url("backgrounds/back-064.gif");
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+    }
+
+    .milestone {
+        text-align: center;
+        position: relative;
+    }
+
+    .milestone img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 5px;
+    }
+
+    .milestone-label {
+        font-size: 0.5rem;
+        color: rgb(0, 0, 0);
+    }
+
+    .milestone.locked img {
+        filter: grayscale(100%);
+        opacity: 0.5;
+    }
+
+    .milestone.locked::after {
+        content: "🔒";
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1.5rem;
+    }
+
+    .cig-visualization {
+        margin-top: 30px;
+        text-align: center;
+        position: relative;
+        min-height: 150px;
+    }
+
+    .cig-pile {
+        width: 100%;
+        height: 150px;
+        position: relative;
+        border: 3px dotted #d9ff00;
+        background-image: url('backgrounds/back-312.gif');
+        /* With this line */
+        background-repeat: repeat;
+        /* With this line */
+        background-size: auto;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .cig-butt {
+        position: absolute;
+        width: 25px;
+        height: auto;
+        z-index: 5;
+    }
+
+    .cig-label {
+        color: rgb(0, 0, 0);
+        margin-top: 10px;
+        font-size: 0.7rem;
+    }
+
+    
+
+    
+
+    
+    .floating-gif {
+        position: absolute;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .floating-gif img {
+        width: 80px;
+        height: auto;
+    }
+
+    .glow-button {
+        background: linear-gradient(to right, #00ffbf, #16ffe0);
+        color: #000000;
+        font-size: 0.7rem;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(255, 217, 0, 0.5);
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { box-shadow: 0 0 5px rgba(251, 255, 0, 0.5); }
+        to { box-shadow: 0 0 20px rgb(255, 231, 123); }
+    }
+
+    
+    /* New container for the tasks layout */
+    .tasks-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        max-width: 1000px;
+        position: relative;
+        margin-top: 70px; /* Give space for the fixed header */
+        padding-top: 40px;
+        padding-bottom: 40px;
+
+    }
+        /* Updated Corner GIF styling with hover effects */
+    .corner-gif {
+        position: absolute;
+        top: 0px;   
+        right: 85px;  
+        z-index: 100;  
+        width: 100px;  
+        height: 100px; 
+        /* Enable pointer events for hover */
+        pointer-events: auto;
+        /* Add transition for smooth animation */
+        transition: transform 0.3s ease;
+    }
+
+    /* Grow and tilt the GIF on hover */
+    .corner-gif:hover {
+        transform: scale(1.3) rotate(-15deg);
+    }
+
+    .corner-gif img {
+        width: 200%;
+        height: 200%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    
+
+
+    
+    </style>
+</head>
+<body>
+
+
+    <!-- Fixed header with button -->
+    <div class="header-container">
+        <h1>quit the bad habits!</h1>
+        <div class="header-button-container">
+            <button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
+                Home
+            </button>
+        </div>
+    </div>
+
+    <div class="tasks-container">
+
+        <!-- Update your corner-gif div to include the tooltip -->
+        <div class="corner-gif" id="corner-gif-container">
+            <img src="gifs/quit-angle.gif" alt="Corner decoration">
+        </div>
+        <!-- Main content container -->
+        <div class="main-container">
+            <div class="title-box">
+                <div class="title-text">
+                    I've been a non-smoker for <span id="days">0</span> days!
+                </div>
+            </div>
+            <audio id="celebration-music" src="music/celebrate.mp3" preload="auto"></audio>
+            <!-- Counter grid with various statistics -->
+            <div class="counter-grid">
+                <div class="counter-box">
+                    <div class="counter-title">CIGARETTES NOT SMOKED</div>
+                    <div class="counter-value" id="cigs-count">0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-title">MONEY SAVED</div>
+                    <div class="counter-value" id="money-saved">$0</div>
+                </div>
+                <div class="counter-box">
+                    <div class="counter-title">LIFE REGAINED</div>
+                    <div class="counter-value" id="time-saved">0 hours</div>
+                </div>
+            </div>
+            
+            <!-- Visual representation of cigarettes -->
+            <div class="cig-visualization">
+                <div class="cig-pile" id="cig-pile">
+                    <!-- Cigarette butts will be added here by JavaScript -->
+                </div>
+                <div class="cig-label">Your pile of cigarettes not smoked (sample of 30)</div>
+            </div>
+            
+            <!-- Achievement milestones -->
+            <div class="milestones">
+                <div class="milestone-title">MY  ACHIEVEMENTS :) </div>
+                <div class="milestone-grid" id="milestone-grid">
+                    <!-- Milestones will be added here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Celebration button -->
+            <div style="text-align: center;">
+                <button class="glow-button" id="celebration-btn">CELEBRATE MY PROGRESS!</button>
+            </div>
+        </div>
+    </div>
+        <!-- Floating decorative elements will be added by JavaScript -->
+    <div id="floating-elements"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the date you quit smoking (Year, Month-1, Day)
+            const quitDate = new Date(2025, 0, 6); // January 6, 2025 - CHANGE THIS!
+            const cigarettesPerDay = 20;
+            const cigaretteCost = 0.50; // Cost per cigarette in dollars
+            
+       
+            // Achievement milestones
+            const milestones = [
+                { days: 1, name: "First Day", icon: "gifs/trophy_1.gif" },
+                { days: 7, name: "One Week", icon: "gifs/trophy_2.gif" },
+                { days: 30, name: "One Month", icon: "gifs/trophy_3.gif" },
+                { days: 90, name: "Three Months", icon: "gifs/trophy_4.gif" },
+                { days: 180, name: "Six Months", icon: "gifs/trophy_5.gif" },
+                { days: 365, name: "One Year", icon: "gifs/trophy_6.gif" }
+            ];
+            
+            // Calculate days since quitting
+            function calculateDaysSinceQuitting() {
+                const now = new Date();
+                const timeDiff = now - quitDate;
+                return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            }
+            
+            // Update all counters
+            function updateCounters() {
+                const daysSince = calculateDaysSinceQuitting();
+                
+                // Update days counter
+                document.getElementById('days').textContent = daysSince;
+                
+                // Update cigarettes not smoked
+                const cigarettesNotSmoked = daysSince * cigarettesPerDay;
+                document.getElementById('cigs-count').textContent = cigarettesNotSmoked;
+                
+                // Update money saved (assuming $0.50 per cigarette)
+                const moneySaved = cigarettesNotSmoked * cigaretteCost;
+                document.getElementById('money-saved').textContent = '$' + moneySaved.toFixed(2);
+                
+                // Update life regained (assuming 11 minutes of life lost per cigarette)
+                const minutesSaved = cigarettesNotSmoked * 11;
+                const hoursSaved = Math.floor(minutesSaved / 60);
+                const daysSaved = Math.floor(hoursSaved / 24);
+                
+                let timeString;
+                if (daysSaved > 1) {
+                    timeString = daysSaved + ' days';
+                } else {
+                    timeString = hoursSaved + ' hours';
+                }
+                document.getElementById('time-saved').textContent = timeString;
+                
+                
+                // Update achievements
+                updateAchievements(daysSince);
+            }
+            
+          
+            
+            // Update achievements based on days quit
+            function updateAchievements(daysSince) {
+                const milestoneGrid = document.getElementById('milestone-grid');
+                milestoneGrid.innerHTML = '';
+                
+                milestones.forEach(milestone => {
+                    const achieved = daysSince >= milestone.days;
+                    
+                    const milestoneElement = document.createElement('div');
+                    milestoneElement.className = 'milestone ' + (achieved ? 'achieved' : 'locked');
+                    
+                    const icon = document.createElement('img');
+                    icon.src = milestone.icon;
+                    icon.alt = milestone.name;
+                    
+                    const label = document.createElement('div');
+                    label.className = 'milestone-label';
+                    label.textContent = milestone.name;
+                    
+                    milestoneElement.appendChild(icon);
+                    milestoneElement.appendChild(label);
+                    milestoneGrid.appendChild(milestoneElement);
+                });
+            }
+            
+            // Add sample cigarette butts to the visualization
+// Add cigarette butts based on actual cigarettes not smoked
+            function addCigaretteVisual() {
+                const container = document.getElementById('cig-pile');
+                container.innerHTML = '';
+                
+                // Get actual number of cigarettes not smoked
+                const daysSince = calculateDaysSinceQuitting();
+                const cigarettesNotSmoked = daysSince * cigarettesPerDay;
+                
+                // Use a scaling factor to represent the cigarettes (1 butt per X cigarettes)
+                // Adjust this number based on how many you want to show
+                const scalingFactor = 20; // Show 1 butt per 20 cigarettes
+                
+                // Calculate how many to show, with a reasonable maximum to prevent performance issues
+                const maxCigsToShow = 300; // Cap to prevent overwhelming the page
+                const cigsToShow = Math.min(Math.ceil(cigarettesNotSmoked / scalingFactor), maxCigsToShow);
+                
+                // Update the label to explain the visualization
+                document.querySelector('.cig-label').textContent = 
+                    `Each cigarette butt represents ${scalingFactor} cigarettes not smoked (${cigsToShow} of ${cigarettesNotSmoked} total)`;
+                
+                for (let i = 0; i < cigsToShow; i++) {
+                    const butt = document.createElement('img');
+                    butt.src = 'gifs/cigarette-butt.gif';
+                    butt.alt = 'Cigarette butt';
+                    butt.className = 'cig-butt';
+                    
+                    // Position randomly within the container
+                    const containerWidth = container.offsetWidth;
+                    const containerHeight = container.offsetHeight;
+                    
+                    const xPos = Math.floor(Math.random() * (containerWidth - 30));
+                    const yPos = Math.floor(Math.random() * (containerHeight - 30));
+                    const rotation = Math.floor(Math.random() * 360);
+                    
+                    butt.style.left = xPos + 'px';
+                    butt.style.top = yPos + 'px';
+                    butt.style.transform = `rotate(${rotation}deg)`;
+                    
+                    container.appendChild(butt);
+                }
+            }
+                      // Variable to track active celebration
+            let celebrationTimer = null;
+            let celebrationInterval = null;
+            
+            // Add the celebration effect
+            // Add the celebration effect
+            function addCelebration() {
+                // Clear any existing celebration
+                if (celebrationTimer) {
+                    clearTimeout(celebrationTimer);
+                    celebrationTimer = null;
+                }
+                if (celebrationInterval) {
+                    clearInterval(celebrationInterval);
+                    celebrationInterval = null;
+                }
+                
+                // Play celebration music
+                const music = document.getElementById('celebration-music');
+                music.currentTime = 0; // Reset to beginning
+                music.volume = 0.6; // Set volume to 70%
+                
+                // Play the music and handle any autoplay restrictions
+                const playPromise = music.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.log("Audio play failed:", error);
+                        // Most browsers require user interaction before auto-playing audio
+                    });
+                }
+                
+                // Add initial celebration GIFs
+                refreshCelebrationGifs();
+                
+                // Set up interval to refresh GIFs every 10 seconds
+                celebrationInterval = setInterval(refreshCelebrationGifs, 10000); // 10 seconds
+                
+                // End celebration after 3 minutes (or adjust to match your song length)
+                celebrationTimer = setTimeout(() => {
+                    if (celebrationInterval) {
+                        clearInterval(celebrationInterval);
+                        celebrationInterval = null;
+                    }
+                    
+                    // Clear the GIFs
+                    const container = document.getElementById('floating-elements');
+                    container.innerHTML = '';
+                    
+                    celebrationTimer = null;
+                }, 180000); // 3 minutes
+            }
+            
+             // Function to refresh the celebration GIFs
+            function refreshCelebrationGifs() {
+                const container = document.getElementById('floating-elements');
+                container.innerHTML = '';
+                
+                // Celebration GIFs
+                const celebrationGifs = [
+                    'gifs/cute-bubble-star.gif',
+                    'gifs/mac-demarco.gif',
+                    'gifs/colorful-stars.gif',
+                    'gifs/flower.gif'
+                ];
+                
+                // Create GIFs
+                for (let i = 0; i < 20; i++) {
+                    const gifElement = document.createElement('div');
+                    gifElement.className = 'floating-gif';
+                    
+                    // Random position
+                    const xPos = Math.floor(Math.random() * window.innerWidth);
+                    const yPos = Math.floor(Math.random() * window.innerHeight);
+                    
+                    gifElement.style.left = xPos + 'px';
+                    gifElement.style.top = yPos + 'px';
+                    
+                    // Random GIF from the collection
+                    const randomGif = celebrationGifs[Math.floor(Math.random() * celebrationGifs.length)];
+                    
+                    const img = document.createElement('img');
+                    img.src = randomGif;
+                    gifElement.appendChild(img);
+                    
+                    container.appendChild(gifElement);
+                }
+            }
+
+                
+            
+            // Initialize everything
+            updateCounters();
+            addCigaretteVisual();
+            
+            // Add celebration button click event
+            document.getElementById('celebration-btn').addEventListener('click', function() {
+                addCelebration();
+            });
+            
+            // Check for date change to update values
+            let lastCheckedDay = new Date().getDate();
+            
+            setInterval(function() {
+                const currentDay = new Date().getDate();
+                if (currentDay !== lastCheckedDay) {
+                    // Day has changed, update everything
+                    updateCounters();
+                    addCigaretteVisual();
+                    lastCheckedDay = currentDay;
+                }
+            }, 3600000); // Check every hour
+            
+            // Update when window is resized
+            window.addEventListener('resize', function() {
+                addCigaretteVisual();
+            });
+        });
+    </script>
+</body>
+</html>
