@@ -1,9 +1,9 @@
-# My Website
-
-## 📖 Description
+# My Website 
+![star line](gifs/line28.gif)
+##  Description
 This website is a personal playground for me :)
 
-## 🌟 Website Structure
+##  Website Structure
 ```
 ├── 📁 Root
 │   ├── 📄 index.html (MAIN PAGE)
@@ -22,7 +22,7 @@ This website is a personal playground for me :)
     └── 📁 backgrounds
 ```
 
-## 🎮 Pages
+##  Pages
 * **index.html**: Main landing page with navigation to other sections
 * **research.html**: Showcases my research WINK WINK
 * **tetris.html**: A fully playable Tetris game with leaderboard functionality
@@ -30,7 +30,7 @@ This website is a personal playground for me :)
 * **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters and you can celebrate my achievement
 * **my_babes.html**: ehe
 
-## 🥚 Easter Eggs
+##  Easter Eggs
 Type 666 during the Tetris game for a surprise
 
 
