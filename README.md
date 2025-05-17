@@ -1,4 +1,4 @@
-# My Y2K-Inspired Personal Website
+# My Website
 
 ## 📖 Description
 This website is a personal playground for me :)
@@ -24,14 +24,14 @@ This website is a personal playground for me :)
 
 ## 🎮 Pages
 * **index.html**: Main landing page with navigation to other sections
-* **research.html**: Showcases my research on blood carbon dioxide measuring
+* **research.html**: Showcases my research WINK WINK
 * **tetris.html**: A fully playable Tetris game with leaderboard functionality
 * **to-do.html**: A to-do list tracker with local storage
-* **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters
-* **my_babes.html**: [Your content here]
+* **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters and you can celebrate my achievement
+* **my_babes.html**: ehe
 
 ## 🥚 Easter Eggs
-Type 666 during the Tetris game for a surprise effect (red glow and sound)
+Type 666 during the Tetris game for a surprise
 
 ---
 
