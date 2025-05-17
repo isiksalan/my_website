@@ -34,5 +34,6 @@ This website is a personal playground for me :)
 Type 666 during the Tetris game for a surprise
 
 ---
-
+🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️
 > "This site is currently under construction :))"
+🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️
