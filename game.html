@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple game</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            cursor: url('etc/cursor-index.gif'), auto;
+            font-family: 'Press Start 2P', cursive;
+            box-sizing: border-box;
+        }
+
+        *:active {
+            cursor: url('etc/cursor-index.gif'), auto !important;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 50vh;
+            /* Use your SVG as background - replace with your desired game background */
+            background-image: url('backgrounds/back-012.gif');
+            background-repeat: repeat;
+            background-position: center top;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+
+        /* Game specific styles */
+        #game-area {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #player {
+            position: absolute;
+            width: 24px; /* Adjust based on your player.gif size */
+            height: 24px; /* Adjust based on your player.gif size */
+            background-image: url('gifs/player1.gif');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transition: transform 0.1s ease-out;
+
+        }
+
+
+    </style>
+</head>
+<body>
+    <!-- Game area -->
+    <div id="game-area">
+        <div id="player"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the player element
+            const player = document.getElementById('player');
+            
+            // Initial position (center of screen)
+            let playerX = window.innerWidth / 2 - 32; // Half of player width
+            let playerY = window.innerHeight / 2 - 32; // Half of player height
+            
+            // Movement speed
+            const speed = 5;
+            
+            // Set initial player position
+            updatePlayerPosition();
+            
+            // Track which keys are currently pressed
+            const keysPressed = {};
+            
+            // Key down event listener
+            document.addEventListener('keydown', function(e) {
+                // Store the key state
+                keysPressed[e.key] = true;
+            });
+            
+            // Key up event listener
+            document.addEventListener('keyup', function(e) {
+                // Clear the key state
+                keysPressed[e.key] = false;
+            });
+            
+            // Game loop
+            function gameLoop() {
+                // Move player based on keys pressed
+                if (keysPressed['ArrowUp']) {
+                    playerY -= speed;
+                }
+                if (keysPressed['ArrowDown']) {
+                    playerY += speed;
+                }
+                if (keysPressed['ArrowLeft']) {
+                    playerX -= speed;
+                }
+                if (keysPressed['ArrowRight']) {
+                    playerX += speed;
+                }
+                
+                // Keep player within screen bounds
+                playerX = Math.max(0, Math.min(window.innerWidth - 64, playerX));
+                playerY = Math.max(0, Math.min(window.innerHeight - 64, playerY));
+                
+                // Update player position
+                updatePlayerPosition();
+                
+                // Continue the game loop
+                requestAnimationFrame(gameLoop);
+            }
+            
+            // Update player position
+            function updatePlayerPosition() {
+                player.style.left = playerX + 'px';
+                player.style.top = playerY + 'px';
+            }
+            
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                // Keep player in bounds when window is resized
+                playerX = Math.min(window.innerWidth - 64, playerX);
+                playerY = Math.min(window.innerHeight - 64, playerY);
+                updatePlayerPosition();
+            });
+            
+            // Start the game loop
+            gameLoop();
+        });
+    </script>
+</body>
+</html>
