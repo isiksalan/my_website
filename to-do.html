@@ -235,8 +235,8 @@
     .achieved-header {
         text-align: center;
         margin-bottom: 15px;
-        color: #555;
-        background-color: rgba(255, 255, 255, 0.7);
+        color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.192);
         padding: 5px;
         border-radius: 5px;
     }
@@ -469,7 +469,7 @@
         top: 60px; /* Below the header */
         left: 0;
         width: 100%;
-        background-color: rgba(255, 173, 244, 0.85);
+        background-color: rgba(158, 255, 255, 0.384);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -487,8 +487,8 @@
         padding: 5px 10px;
         background-color: rgba(255, 255, 255, 0.8);
         border-radius: 10px;
-        border: 2px solid #ff6ec7;
-        box-shadow: 0 0 10px rgba(255, 0, 191, 0.3);
+        border: 2px solid #6fff5c;
+        box-shadow: 0 0 10px rgba(17, 219, 77, 0.3);
     }
 
     .date-display {
@@ -802,10 +802,10 @@
             font-size: 2.5rem;
             font-weight: bold;
             background: linear-gradient(to bottom, #ffcc00, #ff6600);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            /*-webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;*/
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+            /*filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.199));*/
         }
 
         /* Graph styles */
@@ -819,8 +819,8 @@
         }
 
         .retro-graph-title {
-            text-align: center;
-            font-size: 0.7rem;
+            text-align: left;
+            font-size: 0.5rem;
             color: #800080;
             margin-bottom: 15px;
             text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
@@ -857,7 +857,9 @@
 
         .graph-bar {
             width: 30px;
-            background: linear-gradient(to top, #ff3366, #ff66cc);
+            
+            background-image: url(backgrounds/sparklebackground.gif);
+            background-repeat: repeat;
             border: 2px solid;
             border-color: #fff #999 #999 #fff;
             border-radius: 3px 3px 0 0;
@@ -927,21 +929,240 @@
 
         .retro-stats-total-value {
             font-size: 1.5rem;
-            color: #ff4500;
+            color: #ff2424;
             text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         }
 
         /* Different grade colors */
-        .grade-ap { background: linear-gradient(to bottom, #ffcc00, #ff6600); }
-        .grade-a { background: linear-gradient(to bottom, #ffff00, #ffa500); }
-        .grade-bp { background: linear-gradient(to bottom, #adff2f, #32cd32); }
-        .grade-b { background: linear-gradient(to bottom, #90ee90, #2e8b57); }
-        .grade-cp { background: linear-gradient(to bottom, #00bfff, #1e90ff); }
-        .grade-c { background: linear-gradient(to bottom, #87ceeb, #4169e1); }
-        .grade-dp { background: linear-gradient(to bottom, #da70d6, #9932cc); }
-        .grade-d { background: linear-gradient(to bottom, #dda0dd, #8b008b); }
-        .grade-fp { background: linear-gradient(to bottom, #ff69b4, #ff1493); }
-        .grade-f { background: linear-gradient(to bottom, #ff6347, #dc143c); }
+        .grade-ap { background: linear-gradient(to bottom, #ffcc0057, #ff660054); }
+        .grade-a { background: linear-gradient(to bottom, #ffff0059, #ffa60067); }
+        .grade-bp { background: linear-gradient(to bottom, #acff2f5b, #32cd3267); }
+        .grade-b { background: linear-gradient(to bottom, #90ee9059, #2e8b565b); }
+        .grade-cp { background: linear-gradient(to bottom, #00bfff52, #1e8fff70); }
+        .grade-c { background: linear-gradient(to bottom, #87cfeb3a, #4169e167); }
+        .grade-dp { background: linear-gradient(to bottom, #da70d62f, #9932cc46); }
+        .grade-d { background: linear-gradient(to bottom, #dda0dd3f, #8b008b3f); }
+        .grade-fp { background: linear-gradient(to bottom, #ff69b481, #ff149142); }
+        .grade-f { background: linear-gradient(to bottom, #ff63476c, #dc143c6b); }
+
+
+    /* Party celebration styles */
+        #party-celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .party-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1001;
+        }
+        
+        .spotlight-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1002;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .spotlight-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 150px;
+            background: radial-gradient(
+                ellipse,
+                rgba(255, 255, 255, 0.7) 0%,
+                rgba(255, 255, 255, 0) 70%
+            );
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: pulseGlow 2s infinite alternate;
+            z-index: 1001;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.5; width: 280px; }
+            to { opacity: 0.8; width: 320px; }
+        }
+
+
+        .rainbow-spotlight {
+            position: absolute;
+            top: -100px; /* Starting above the viewport */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* Narrow at the top */
+            height: 800px; /* Long enough to reach the bottom */
+            background: linear-gradient(to bottom, 
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 0, 0, 0.3) 10%,
+                rgba(255, 165, 0, 0.3) 20%,
+                rgba(255, 255, 0, 0.3) 30%,
+                rgba(0, 128, 0, 0.3) 50%,
+                rgba(0, 0, 255, 0.3) 70%,
+                rgba(75, 0, 130, 0.3) 85%,
+                rgba(238, 130, 238, 0.3) 100%
+            );
+            clip-path: polygon(0 0, 100% 0, 150% 100%, -50% 100%); /* Creates a cone/trapezoid shape */
+            filter: blur(5px);
+            opacity: 0.8;
+            transform-origin: top center;
+            animation: spotlightSway 8s ease-in-out infinite;
+            box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.3);
+        }
+
+                /* Add sway animation to make the spotlight move slightly */
+        @keyframes spotlightSway {
+            0% { transform: translateX(-50%) rotate(-5deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+            100% { transform: translateX(-50%) rotate(-5deg); }
+        }
+
+        
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.8; }
+            to { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .dancing-man {
+            position: absolute;
+            bottom: 55%; /* Position from bottom instead of center */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1003;
+            height: 500px;
+        }
+        
+        .disco-ball {
+            position: absolute;
+            z-index: 1002;
+            width: 80px;
+            height: 80px;
+            animation: spin 3s linear infinite;
+        }
+        
+                
+        /* Optional: Add some light "dust" particles in the beam */
+        .spotlight-dust {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1002;
+        }
+
+        .dust-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: floatDust 5s linear infinite;
+        }
+
+        @keyframes floatDust {
+            0% { opacity: 0; transform: translateY(0) translateX(0); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(300px) translateX(50px); }
+        }
+
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .close-party {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1004;
+            background: linear-gradient(to bottom, #ff0000, #cc0000);
+            color: white;
+            border: 3px solid white;
+            border-radius: 10px;
+            padding: 10px 15px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            animation: blink 0.5s infinite alternate;
+            box-shadow: 0 0 10px 2px rgba(255,255,255,0.5);
+        }
+        
+        @keyframes blink {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        /* A+ grade animation */
+        .grade-ap.party-mode {
+            animation: rainbow-text 2s infinite;
+            font-size: 4rem !important;
+            transition: font-size 0.5s ease;
+        }
+        
+        @keyframes rainbow-text {
+            0% { color: red; text-shadow: 0 0 10px red; }
+            14% { color: orange; text-shadow: 0 0 10px orange; }
+            28% { color: yellow; text-shadow: 0 0 10px yellow; }
+            42% { color: green; text-shadow: 0 0 10px green; }
+            57% { color: blue; text-shadow: 0 0 10px blue; }
+            71% { color: indigo; text-shadow: 0 0 10px indigo; }
+            85% { color: violet; text-shadow: 0 0 10px violet; }
+            100% { color: red; text-shadow: 0 0 10px red; }
+        }
+            @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        }
+    
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        @keyframes wobble {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-15px) rotate(-5deg); }
+            75% { transform: translateX(15px) rotate(5deg); }
+        }
+        
+        .celebration-gif {
+            position: absolute;
+            z-index: 1005;
+            pointer-events: none;
+        }
+        
+        .celebration-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
     /* Responsive design for smaller screens */
     @media (max-width: 768px) {
         .tasks-container {
@@ -975,6 +1196,8 @@
             width: 90%;
             max-width: 300px;
         }}
+
+
     </style>
 </head>
 
@@ -987,10 +1210,7 @@
                 Home
             </button>
         </div>
-    </div>
-    <audio id="celebration-music" src="music/clapping.wav" preload="auto"></audio>
-    <!-- NEW: Date selector -->
-    <div class="date-selector">
+        <div class="date-selector">
         <div class="date-selector-inner">
             <button class="date-nav-button" id="prev-date">◀ Prev</button>
             <div class="date-display">
@@ -1002,7 +1222,11 @@
                 <img src="gifs/calendar-icon.gif" alt="Calendar" class="calendar-icon"> Calendar
             </button>
         </div>
+        </div>
     </div>
+    <audio id="celebration-music" src="music/clapping.wav" preload="auto"></audio>
+    <!-- NEW: Date selector -->
+    
 
     <!-- Date picker container (hidden by default) -->
     <div class="date-picker-container" id="date-picker">
@@ -1033,7 +1257,8 @@
             <img src="gifs/britney-sits.gif" alt="Corner decoration">
             <div class="achievement-tooltip" id="achievement-counter">
                 <div>You have achieved</div>
-                <div id="goal-count">0 goals!</div>
+                <div id="goal-count">0 goals</div>
+                <div>today!</div>
             </div>
         </div>
         <div id="retro-stats-window" class="retro-window" style="display: none;">
@@ -1058,7 +1283,7 @@
                         </div>
                     </div>
                     <div class="retro-stats-total">
-                        <div class="retro-stats-total-label">Total Achievements:</div>
+                        <div class="retro-stats-total-label">Total achievements this week:</div>
                         <div class="retro-stats-total-value" id="total-achievements">21</div>
                     </div>
                 </div>
@@ -1102,592 +1327,891 @@
                 <!-- Achieved items will be added here -->
             </ul>
         </div>
+        <div id="party-celebration" style="display: none;">
+            <!-- Darkened overlay -->
+            <div class="party-overlay"></div>
+            
+            <!-- Rainbow spotlight container -->
+            <div class="spotlight-container">
+                <div class="rainbow-spotlight"></div>
+                <div class="spotlight-dust"></div>
+                <!-- Dancing man in spotlight -->
+                <img src="gifs/dancing-man.gif" alt="Party time!" class="dancing-man">
+            </div>
+            
+            <!-- Disco balls container -->
+            <div class="disco-container">
+                <!-- Disco balls will be added dynamically -->
+            </div>
+            
+            <!-- Close button -->
+            <button id="close-party" class="close-party">× STOP PARTY</button>
+        </div>
+
+        <!-- Add the audio element for the celebration song -->
+        <audio id="celebration-song" src="music/sean-temperature.mp3" preload="auto"></audio>
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set the background image for the body
-            const setBackgroundImage = () => {
-                document.body.style.backgroundImage = 'url("backgrounds/back-290.gif")';
-                document.body.style.backgroundRepeat = 'repeat';
-                document.body.style.backgroundSize = 'auto';
-            };
+        // Set the background image for the body
+        const setBackgroundImage = () => {
+            document.body.style.backgroundImage = 'url("backgrounds/back-290.gif")';
+            document.body.style.backgroundRepeat = 'repeat';
+            document.body.style.backgroundSize = 'auto';
+        };
+        
+        setBackgroundImage();
+        
+        // DOM elements
+        const todoInput = document.getElementById('todo-input');
+        const addButton = document.getElementById('add-button');
+        const todoList = document.getElementById('todo-list');
+        const achievedList = document.getElementById('achieved-list');
+        const dateDisplayEl = document.getElementById('date-display');
+        const dayDisplayEl = document.getElementById('day-display');
+        const prevDateBtn = document.getElementById('prev-date');
+        const nextDateBtn = document.getElementById('next-date');
+        const openCalendarBtn = document.getElementById('open-calendar');
+        const datePickerEl = document.getElementById('date-picker');
+        const closeCalendarBtn = document.getElementById('close-calendar');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        const monthYearDisplayEl = document.getElementById('month-year-display');
+        const calendarGridEl = document.querySelector('.calendar-grid');
+        const emptyDayMessageEl = document.getElementById('empty-day-message');
+        const cornerGif = document.querySelector('.corner-gif');
+        const closeStatsBtn = document.getElementById('close-stats-window');
+        const overlay = document.getElementById('retro-window-overlay');
+        
+        // Date management
+        let currentDate = new Date(); // Default to today
+        let currentCalendarMonth = new Date(); // For the calendar view
+        
+        // Format date as MM/DD/YY string
+        const formatDateDisplay = (date) => {
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const year = String(date.getFullYear()).slice(-2);
+            return `${month}/${day}/${year}`;
+        };
+        
+        // Get day name
+        const getDayName = (date) => {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[date.getDay()];
+        };
+        
+        // Format date as YYYY-MM-DD for storage key
+        const formatDateForStorage = (date) => {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+        
+        // Function to get achievement data for the last 7 days
+        function getLast7DaysData() {
+            const data = [];
+            const today = new Date();
             
-            setBackgroundImage();
-            
-            // DOM elements
-            const todoInput = document.getElementById('todo-input');
-            const addButton = document.getElementById('add-button');
-            const todoList = document.getElementById('todo-list');
-            const achievedList = document.getElementById('achieved-list');
-            const dateDisplayEl = document.getElementById('date-display');
-            const dayDisplayEl = document.getElementById('day-display');
-            const prevDateBtn = document.getElementById('prev-date');
-            const nextDateBtn = document.getElementById('next-date');
-            const openCalendarBtn = document.getElementById('open-calendar');
-            const datePickerEl = document.getElementById('date-picker');
-            const closeCalendarBtn = document.getElementById('close-calendar');
-            const prevMonthBtn = document.getElementById('prev-month');
-            const nextMonthBtn = document.getElementById('next-month');
-            const monthYearDisplayEl = document.getElementById('month-year-display');
-            const calendarGridEl = document.querySelector('.calendar-grid');
-            const emptyDayMessageEl = document.getElementById('empty-day-message');
-            const cornerGif = document.querySelector('.corner-gif');
-            const closeStatsBtn = document.getElementById('close-stats-window');
-            const overlay = document.getElementById('retro-window-overlay');
-            
-            // Date management
-            let currentDate = new Date(); // Default to today
-            let currentCalendarMonth = new Date(); // For the calendar view
-            
-            // Format date as MM/DD/YY string
-            const formatDateDisplay = (date) => {
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                const year = String(date.getFullYear()).slice(-2);
-                return `${month}/${day}/${year}`;
-            };
-            
-            // Get day name
-            const getDayName = (date) => {
-                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                return days[date.getDay()];
-            };
-            
-            // Format date as YYYY-MM-DD for storage key
-            const formatDateForStorage = (date) => {
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            };
-            
-            // Function to show retro stats window
-            function showRetroStatsWindow() {
-                // Get the last 7 days of data
-                const last7DaysData = getLast7DaysData();
+            for (let i = 6; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
                 
-                // Calculate total and determine grade
-                const totalAchievements = calculateTotalAchievements(last7DaysData);
-                const grade = determineGrade(totalAchievements);
-                
-                // Update the grade display
-                updateGradeDisplay(grade, totalAchievements);
-                
-                // Generate the graph
-                generateGraph(last7DaysData);
-                
-                // Show the window and overlay
-                document.getElementById('retro-stats-window').style.display = 'block';
-                document.getElementById('retro-window-overlay').style.display = 'block';
-            }
-
-            // Function to get achievement data for the last 7 days
-            function getLast7DaysData() {
-                const data = [];
-                const today = new Date();
-                
-                for (let i = 6; i >= 0; i--) {
-                    const date = new Date(today);
-                    date.setDate(date.getDate() - i);
-                    
-                    const dateKey = formatDateForStorage(date);
-                    const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
-                    
-                    const achievementCount = dateData && dateData.achieved ? dateData.achieved.length : 0;
-                    
-                    data.push({
-                        date: date,
-                        count: achievementCount
-                    });
-                }
-                
-                return data;
-            }
-
-            // Calculate total achievements across all days
-            function calculateTotalAchievements(daysData) {
-                return daysData.reduce((total, day) => total + day.count, 0);
-            }
-
-            // Determine grade based on total achievements
-            function determineGrade(total) {
-                if (total >= 21) return { letter: 'A+', class: 'grade-ap' };
-                if (total >= 17) return { letter: 'A', class: 'grade-a' };
-                if (total >= 14) return { letter: 'B+', class: 'grade-bp' };
-                if (total >= 8) return { letter: 'B', class: 'grade-b' };
-                if (total >= 7) return { letter: 'C+', class: 'grade-cp' };
-                if (total >= 4) return { letter: 'C-', class: 'grade-c' };
-                if (total >= 3) return { letter: 'D+', class: 'grade-dp' };
-                if (total >= 2) return { letter: 'D-', class: 'grade-d' };
-                if (total >= 1) return { letter: 'F+', class: 'grade-fp' };
-                return { letter: 'F-', class: 'grade-f' };
-            }
-
-            // Update the grade display
-            function updateGradeDisplay(grade, totalAchievements) {
-                const gradeElement = document.getElementById('weekly-grade');
-                gradeElement.textContent = grade.letter;
-                
-                // Remove any existing grade classes
-                gradeElement.className = 'retro-stats-grade';
-                
-                // Add the appropriate grade class
-                gradeElement.classList.add(grade.class);
-                
-                // Update total achievements
-                document.getElementById('total-achievements').textContent = totalAchievements;
-            }
-
-            // Generate the graph for the last 7 days
-            function generateGraph(daysData) {
-                const graphContainer = document.getElementById('achievements-graph');
-                const daysLegend = document.getElementById('days-legend');
-                
-                // Clear existing content
-                graphContainer.innerHTML = '';
-                daysLegend.innerHTML = '';
-                
-                // Find the maximum achievement count to scale the graph
-                const maxCount = Math.max(...daysData.map(day => day.count));
-                const graphHeight = 180; // Same as the CSS height
-                const scale = maxCount > 0 ? graphHeight / maxCount : 0;
-                
-                // Add Y-axis labels
-                const yAxisLabels = document.createElement('div');
-                yAxisLabels.className = 'y-axis-labels';
-                
-                // If we have data, create labels
-                if (maxCount > 0) {
-                    // Create 6 evenly spaced labels
-                    const labelCount = 6;
-                    for (let i = 0; i < labelCount; i++) {
-                        const value = Math.round((maxCount / (labelCount - 1)) * (labelCount - 1 - i));
-                        const label = document.createElement('div');
-                        label.className = 'y-label';
-                        label.textContent = value;
-                        yAxisLabels.appendChild(label);
-                    }
-                } else {
-                    // If no data, just show one label
-                    const label = document.createElement('div');
-                    label.className = 'y-label';
-                    label.textContent = '0';
-                    yAxisLabels.appendChild(label);
-                }
-                
-                graphContainer.appendChild(yAxisLabels);
-                
-                // Add bars for each day
-                daysData.forEach((day, index) => {
-                    // Create bar
-                    const bar = document.createElement('div');
-                    bar.className = 'graph-bar';
-                    
-                    // Calculate bar height based on count
-                    const height = day.count * scale;
-                    bar.style.height = `${height}px`;
-                    
-                    // Add value label
-                    const valueLabel = document.createElement('div');
-                    valueLabel.className = 'graph-bar-value';
-                    valueLabel.textContent = day.count;
-                    bar.appendChild(valueLabel);
-                    
-                    // Add bar to container
-                    graphContainer.appendChild(bar);
-                    
-                    // Add day label
-                    const dayLabel = document.createElement('div');
-                    dayLabel.className = 'day-label';
-                    
-                    // Get short day name (Sun, Mon, etc.)
-                    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                    dayLabel.textContent = dayNames[day.date.getDay()];
-                    
-                    daysLegend.appendChild(dayLabel);
-                });
-            }
-
-            // Close the stats window
-            function closeRetroStatsWindow() {
-                document.getElementById('retro-stats-window').style.display = 'none';
-                document.getElementById('retro-window-overlay').style.display = 'none';
-            }
-            
-            // Update date display
-            const updateDateDisplay = () => {
-                dateDisplayEl.textContent = formatDateDisplay(currentDate);
-                dayDisplayEl.textContent = getDayName(currentDate);
-                
-                // Also update the calendar if it's open
-                if (datePickerEl.style.display === 'block') {
-                    updateCalendarView();
-                }
-            };
-            
-            // Navigate to the previous day
-            const goToPrevDay = () => {
-                const newDate = new Date(currentDate);
-                newDate.setDate(newDate.getDate() - 1);
-                currentDate = newDate;
-                updateDateDisplay();
-                loadDataForCurrentDate();
-            };
-            
-            // Navigate to the next day
-            const goToNextDay = () => {
-                const newDate = new Date(currentDate);
-                newDate.setDate(newDate.getDate() + 1);
-                currentDate = newDate;
-                updateDateDisplay();
-                loadDataForCurrentDate();
-            };
-            
-            // Navigate to specific date
-            const goToDate = (date) => {
-                currentDate = new Date(date);
-                updateDateDisplay();
-                loadDataForCurrentDate();
-            };
-            
-            // Function to update achievement count for the current date
-            const updateAchievementCount = () => {
-                const goalCount = document.getElementById('goal-count');
-                if (goalCount) {
-                    const count = document.getElementById('achieved-list').children.length;
-                    goalCount.textContent = `${count} goal${count !== 1 ? 's' : ''}!`;
-                }
-            };
-            
-            // Check if a date has any tasks
-            const dateHasTasks = (date) => {
                 const dateKey = formatDateForStorage(date);
                 const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
-                if (!dateData) return false;
                 
-                return (dateData.todos && dateData.todos.length > 0) || 
-                    (dateData.achieved && dateData.achieved.length > 0);
-            };
+                const achievementCount = dateData && dateData.achieved ? dateData.achieved.length : 0;
+                
+                data.push({
+                    date: date,
+                    count: achievementCount
+                });
+            }
             
-            // Load data for the current date
-            const loadDataForCurrentDate = () => {
-                // Clear existing lists
-                todoList.innerHTML = '';
-                achievedList.innerHTML = '';
-                
-                const dateKey = formatDateForStorage(currentDate);
-                const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
-                
-                if (dateData) {
-                    // Load todos
-                    if (dateData.todos && dateData.todos.length > 0) {
-                        dateData.todos.forEach(todo => {
-                            addTodoToDOM(todo.text);
-                        });
-                        emptyDayMessageEl.style.display = 'none';
-                    }
-                    
-                    // Load achieved
-                    if (dateData.achieved && dateData.achieved.length > 0) {
-                        dateData.achieved.forEach(item => {
-                            addToAchievedList(item.text);
-                        });
-                        emptyDayMessageEl.style.display = 'none';
-                    }
-                    
-                    // Show empty message if no tasks
-                    if ((!dateData.todos || dateData.todos.length === 0) && 
-                        (!dateData.achieved || dateData.achieved.length === 0)) {
-                        emptyDayMessageEl.style.display = 'block';
-                    }
-                } else {
-                    // No data for this date
-                    emptyDayMessageEl.style.display = 'block';
+            return data;
+        }
+
+        // Calculate total achievements across all days
+        function calculateTotalAchievements(daysData) {
+            return daysData.reduce((total, day) => total + day.count, 0);
+        }
+
+        // Determine grade based on total achievements
+        function determineGrade(total) {
+            if (total >= 21) return { letter: 'A+', class: 'grade-ap' };
+            if (total >= 17) return { letter: 'A', class: 'grade-a' };
+            if (total >= 14) return { letter: 'B+', class: 'grade-bp' };
+            if (total >= 8) return { letter: 'B', class: 'grade-b' };
+            if (total >= 7) return { letter: 'C+', class: 'grade-cp' };
+            if (total >= 4) return { letter: 'C-', class: 'grade-c' };
+            if (total >= 3) return { letter: 'D+', class: 'grade-dp' };
+            if (total >= 2) return { letter: 'D-', class: 'grade-d' };
+            if (total >= 1) return { letter: 'F+', class: 'grade-fp' };
+            return { letter: 'F-', class: 'grade-f' };
+        }
+
+        // Update the grade display
+        function updateGradeDisplay(grade, totalAchievements) {
+            const gradeElement = document.getElementById('weekly-grade');
+            gradeElement.textContent = grade.letter;
+            
+            // Remove any existing grade classes
+            gradeElement.className = 'retro-stats-grade';
+            
+            // Add the appropriate grade class
+            gradeElement.classList.add(grade.class);
+            
+            // Update total achievements
+            document.getElementById('total-achievements').textContent = totalAchievements;
+        }
+
+        // Generate the graph for the last 7 days
+        function generateGraph(daysData) {
+            const graphContainer = document.getElementById('achievements-graph');
+            const daysLegend = document.getElementById('days-legend');
+            
+            // Clear existing content
+            graphContainer.innerHTML = '';
+            daysLegend.innerHTML = '';
+            
+            // Find the maximum achievement count to scale the graph
+            const maxCount = Math.max(...daysData.map(day => day.count));
+            const graphHeight = 180; // Same as the CSS height
+            const scale = maxCount > 0 ? graphHeight / maxCount : 0;
+            
+            // Add Y-axis labels
+            const yAxisLabels = document.createElement('div');
+            yAxisLabels.className = 'y-axis-labels';
+            
+            // If we have data, create labels
+            if (maxCount > 0) {
+                // Create 6 evenly spaced labels
+                const labelCount = 6;
+                for (let i = 0; i < labelCount; i++) {
+                    const value = Math.round((maxCount / (labelCount - 1)) * (labelCount - 1 - i));
+                    const label = document.createElement('div');
+                    label.className = 'y-label';
+                    label.textContent = value;
+                    yAxisLabels.appendChild(label);
                 }
-                
-                // Update achievement count
-                updateAchievementCount();
-            };
+            } else {
+                // If no data, just show one label
+                const label = document.createElement('div');
+                label.className = 'y-label';
+                label.textContent = '0';
+                yAxisLabels.appendChild(label);
+            }
             
-            // Save data for the current date
-            const saveDataForCurrentDate = () => {
-                const dateKey = formatDateForStorage(currentDate);
+            graphContainer.appendChild(yAxisLabels);
+            
+            // Add bars for each day
+            daysData.forEach((day, index) => {
+                // Create bar
+                const bar = document.createElement('div');
+                bar.className = 'graph-bar';
                 
-                const todos = Array.from(todoList.children).map(item => {
-                    return {
-                        text: item.querySelector('.todo-text').textContent
-                    };
-                });
+                // Calculate bar height based on count
+                const height = day.count * scale;
+                bar.style.height = `${height}px`;
                 
-                const achieved = Array.from(achievedList.children).map(item => {
-                    return {
-                        text: item.querySelector('.todo-text').textContent
-                    };
-                });
+                // Add value label
+                const valueLabel = document.createElement('div');
+                valueLabel.className = 'graph-bar-value';
+                valueLabel.textContent = day.count;
+                bar.appendChild(valueLabel);
                 
-                const dateData = { todos, achieved };
-                localStorage.setItem(`todoData_${dateKey}`, JSON.stringify(dateData));
+                // Add bar to container
+                graphContainer.appendChild(bar);
                 
-                // Handle empty day message visibility
-                if (todos.length === 0 && achieved.length === 0) {
-                    emptyDayMessageEl.style.display = 'block';
-                } else {
+                // Add day label
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'day-label';
+                
+                // Get short day name (Sun, Mon, etc.)
+                const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                dayLabel.textContent = dayNames[day.date.getDay()];
+                
+                daysLegend.appendChild(dayLabel);
+            });
+        }
+
+        // Update date display
+        const updateDateDisplay = () => {
+            dateDisplayEl.textContent = formatDateDisplay(currentDate);
+            dayDisplayEl.textContent = getDayName(currentDate);
+            
+            // Also update the calendar if it's open
+            if (datePickerEl.style.display === 'block') {
+                updateCalendarView();
+            }
+        };
+        
+        // Navigate to the previous day
+        const goToPrevDay = () => {
+            const newDate = new Date(currentDate);
+            newDate.setDate(newDate.getDate() - 1);
+            currentDate = newDate;
+            updateDateDisplay();
+            loadDataForCurrentDate();
+        };
+        
+        // Navigate to the next day
+        const goToNextDay = () => {
+            const newDate = new Date(currentDate);
+            newDate.setDate(newDate.getDate() + 1);
+            currentDate = newDate;
+            updateDateDisplay();
+            loadDataForCurrentDate();
+        };
+        
+        // Navigate to specific date
+        const goToDate = (date) => {
+            currentDate = new Date(date);
+            updateDateDisplay();
+            loadDataForCurrentDate();
+        };
+        
+        // Function to update achievement count for the current date
+        const updateAchievementCount = () => {
+            const goalCount = document.getElementById('goal-count');
+            if (goalCount) {
+                const count = document.getElementById('achieved-list').children.length;
+                goalCount.textContent = `${count} goal${count !== 1 ? 's' : ''}`;
+            }
+        };
+        
+        // Check if a date has any tasks
+        const dateHasTasks = (date) => {
+            const dateKey = formatDateForStorage(date);
+            const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
+            if (!dateData) return false;
+            
+            return (dateData.todos && dateData.todos.length > 0) || 
+                (dateData.achieved && dateData.achieved.length > 0);
+        };
+        
+        // Load data for the current date
+        const loadDataForCurrentDate = () => {
+            // Clear existing lists
+            todoList.innerHTML = '';
+            achievedList.innerHTML = '';
+            
+            const dateKey = formatDateForStorage(currentDate);
+            const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
+            
+            if (dateData) {
+                // Load todos
+                if (dateData.todos && dateData.todos.length > 0) {
+                    dateData.todos.forEach(todo => {
+                        addTodoToDOM(todo.text);
+                    });
                     emptyDayMessageEl.style.display = 'none';
                 }
                 
-                // Update the calendar if it's open
-                if (datePickerEl.style.display === 'block') {
-                    updateCalendarView();
+                // Load achieved
+                if (dateData.achieved && dateData.achieved.length > 0) {
+                    dateData.achieved.forEach(item => {
+                        addToAchievedList(item.text);
+                    });
+                    emptyDayMessageEl.style.display = 'none';
                 }
-            };
+                
+                // Show empty message if no tasks
+                if ((!dateData.todos || dateData.todos.length === 0) && 
+                    (!dateData.achieved || dateData.achieved.length === 0)) {
+                    emptyDayMessageEl.style.display = 'block';
+                }
+            } else {
+                // No data for this date
+                emptyDayMessageEl.style.display = 'block';
+            }
             
-            // Generate and update the calendar view
-            const updateCalendarView = () => {
-                // Clear out days from the previous render, but keep the header row
-                const dayElements = calendarGridEl.querySelectorAll('.calendar-day');
-                dayElements.forEach(el => el.remove());
-                
-                // Get first day of the month and last day of the month
-                const firstDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 1);
-                const lastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, 0);
-                
-                // Update month/year display
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                    'July', 'August', 'September', 'October', 'November', 'December'];
-                monthYearDisplayEl.textContent = `${monthNames[currentCalendarMonth.getMonth()]} ${currentCalendarMonth.getFullYear()}`;
-                
-                // Get the day of week the first day falls on (0 = Sunday, 6 = Saturday)
-                const firstDayOfWeek = firstDay.getDay();
-                
-                // Get some days from the previous month to fill the calendar grid
-                const daysFromPrevMonth = firstDayOfWeek;
-                const prevMonthLastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 0).getDate();
-                
-                // Generate previous month days
-                for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
-                    const dayNum = prevMonthLastDay - i;
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day other-month';
-                    dayElement.textContent = dayNum;
-                    
-                    // Create date object for this day
-                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() - 1, dayNum);
-                    
-                    // Check if this date has tasks
-                    if (dateHasTasks(dayDate)) {
-                        dayElement.classList.add('has-tasks');
-                    }
-                    
-                    dayElement.addEventListener('click', () => {
-                        goToDate(dayDate);
-                        datePickerEl.style.display = 'none';
-                    });
-                    
-                    calendarGridEl.appendChild(dayElement);
-                }
-                
-                // Generate current month days
-                for (let i = 1; i <= lastDay.getDate(); i++) {
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day current-month';
-                    dayElement.textContent = i;
-                    
-                    // Create date object for this day
-                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), i);
-                    
-                    // Check if this is the selected date
-                    if (dayDate.getDate() === currentDate.getDate() && 
-                        dayDate.getMonth() === currentDate.getMonth() && 
-                        dayDate.getFullYear() === currentDate.getFullYear()) {
-                        dayElement.classList.add('selected');
-                    }
-                    
-                    // Check if this date has tasks
-                    if (dateHasTasks(dayDate)) {
-                        dayElement.classList.add('has-tasks');
-                    }
-                    
-                    dayElement.addEventListener('click', () => {
-                        goToDate(dayDate);
-                        datePickerEl.style.display = 'none';
-                    });
-                    
-                    calendarGridEl.appendChild(dayElement);
-                }
-                
-                // Calculate how many days we need from the next month to complete the grid
-                const totalDaysDisplayed = daysFromPrevMonth + lastDay.getDate();
-                const daysFromNextMonth = Math.ceil(totalDaysDisplayed / 7) * 7 - totalDaysDisplayed;
-                
-                // Generate next month days
-                for (let i = 1; i <= daysFromNextMonth; i++) {
-                    const dayElement = document.createElement('div');
-                    dayElement.className = 'calendar-day other-month';
-                    dayElement.textContent = i;
-                    
-                    // Create date object for this day
-                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, i);
-                    
-                    // Check if this date has tasks
-                    if (dateHasTasks(dayDate)) {
-                        dayElement.classList.add('has-tasks');
-                    }
-                    
-                    dayElement.addEventListener('click', () => {
-                        goToDate(dayDate);
-                        datePickerEl.style.display = 'none';
-                    });
-                    
-                    calendarGridEl.appendChild(dayElement);
-                }
-            };
+            // Update achievement count
+            updateAchievementCount();
+        };
+        
+        // Save data for the current date
+        const saveDataForCurrentDate = () => {
+            const dateKey = formatDateForStorage(currentDate);
             
-            // Add a new to-do item to the DOM
-            const addTodoToDOM = (text) => {
-                const todoItem = document.createElement('li');
-                todoItem.className = 'todo-item';
-                
-                const todoText = document.createElement('span');
-                todoText.className = 'todo-text';
-                todoText.textContent = text;
-                
-                const buttonContainer = document.createElement('div');
-                buttonContainer.className = 'button-container';
-                
-                const doneButton = document.createElement('button');
-                doneButton.className = 'done-button';
-                doneButton.textContent = 'Done';
-                
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'delete-button';
-                deleteButton.textContent = 'Delete';
-                
-                buttonContainer.appendChild(doneButton);
-                buttonContainer.appendChild(deleteButton);
-                
-                todoItem.appendChild(todoText);
-                todoItem.appendChild(buttonContainer);
-                todoList.appendChild(todoItem);
-                
-                // Hide empty message
+            const todos = Array.from(todoList.children).map(item => {
+                return {
+                    text: item.querySelector('.todo-text').textContent
+                };
+            });
+            
+            const achieved = Array.from(achievedList.children).map(item => {
+                return {
+                    text: item.querySelector('.todo-text').textContent
+                };
+            });
+            
+            const dateData = { todos, achieved };
+            localStorage.setItem(`todoData_${dateKey}`, JSON.stringify(dateData));
+            
+            // Handle empty day message visibility
+            if (todos.length === 0 && achieved.length === 0) {
+                emptyDayMessageEl.style.display = 'block';
+            } else {
                 emptyDayMessageEl.style.display = 'none';
-                const music = document.getElementById('celebration-music');
+            }
+            
+            // Update the calendar if it's open
+            if (datePickerEl.style.display === 'block') {
+                updateCalendarView();
+            }
+        };
+        
+        // Generate and update the calendar view
+        const updateCalendarView = () => {
+            // Clear out days from the previous render, but keep the header row
+            const dayElements = calendarGridEl.querySelectorAll('.calendar-day');
+            dayElements.forEach(el => el.remove());
+            
+            // Get first day of the month and last day of the month
+            const firstDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 1);
+            const lastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, 0);
+            
+            // Update month/year display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                'July', 'August', 'September', 'October', 'November', 'December'];
+            monthYearDisplayEl.textContent = `${monthNames[currentCalendarMonth.getMonth()]} ${currentCalendarMonth.getFullYear()}`;
+            
+            // Get the day of week the first day falls on (0 = Sunday, 6 = Saturday)
+            const firstDayOfWeek = firstDay.getDay();
+            
+            // Get some days from the previous month to fill the calendar grid
+            const daysFromPrevMonth = firstDayOfWeek;
+            const prevMonthLastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 0).getDate();
+            
+            // Generate previous month days
+            for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
+                const dayNum = prevMonthLastDay - i;
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = dayNum;
+                
+                // Create date object for this day
+                const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() - 1, dayNum);
+                
+                // Check if this date has tasks
+                if (dateHasTasks(dayDate)) {
+                    dayElement.classList.add('has-tasks');
+                }
+                
+                dayElement.addEventListener('click', () => {
+                    goToDate(dayDate);
+                    datePickerEl.style.display = 'none';
+                });
+                
+                calendarGridEl.appendChild(dayElement);
+            }
+            
+            // Generate current month days
+            for (let i = 1; i <= lastDay.getDate(); i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day current-month';
+                dayElement.textContent = i;
+                
+                // Create date object for this day
+                const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), i);
+                
+                // Check if this is the selected date
+                if (dayDate.getDate() === currentDate.getDate() && 
+                    dayDate.getMonth() === currentDate.getMonth() && 
+                    dayDate.getFullYear() === currentDate.getFullYear()) {
+                    dayElement.classList.add('selected');
+                }
+                
+                // Check if this date has tasks
+                if (dateHasTasks(dayDate)) {
+                    dayElement.classList.add('has-tasks');
+                }
+                
+                dayElement.addEventListener('click', () => {
+                    goToDate(dayDate);
+                    datePickerEl.style.display = 'none';
+                });
+                
+                calendarGridEl.appendChild(dayElement);
+            }
+            
+            // Calculate how many days we need from the next month to complete the grid
+            const totalDaysDisplayed = daysFromPrevMonth + lastDay.getDate();
+            const daysFromNextMonth = Math.ceil(totalDaysDisplayed / 7) * 7 - totalDaysDisplayed;
+            
+            // Generate next month days
+            for (let i = 1; i <= daysFromNextMonth; i++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = i;
+                
+                // Create date object for this day
+                const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, i);
+                
+                // Check if this date has tasks
+                if (dateHasTasks(dayDate)) {
+                    dayElement.classList.add('has-tasks');
+                }
+                
+                dayElement.addEventListener('click', () => {
+                    goToDate(dayDate);
+                    datePickerEl.style.display = 'none';
+                });
+                
+                calendarGridEl.appendChild(dayElement);
+            }
+        };
+        
+        // Add a new to-do item to the DOM
+        const addTodoToDOM = (text) => {
+            const todoItem = document.createElement('li');
+            todoItem.className = 'todo-item';
+            
+            const todoText = document.createElement('span');
+            todoText.className = 'todo-text';
+            todoText.textContent = text;
+            
+            const buttonContainer = document.createElement('div');
+            buttonContainer.className = 'button-container';
+            
+            const doneButton = document.createElement('button');
+            doneButton.className = 'done-button';
+            doneButton.textContent = 'Done';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Delete';
+            
+            buttonContainer.appendChild(doneButton);
+            buttonContainer.appendChild(deleteButton);
+            
+            todoItem.appendChild(todoText);
+            todoItem.appendChild(buttonContainer);
+            todoList.appendChild(todoItem);
+            
+            // Hide empty message
+            emptyDayMessageEl.style.display = 'none';
+            const music = document.getElementById('celebration-music');
+            if (music) {
                 music.currentTime = 0; // Reset to beginning
                 music.volume = 0.6; // Set volume to 60%
-                
-                // Add event listeners
-                doneButton.addEventListener('click', () => {
+            }
+            
+            // Add event listeners
+            doneButton.addEventListener('click', () => {
+                if (music) {
                     const playPromise = music.play();
-                    // Move to achieved list
-                    todoList.removeChild(todoItem);
-                    addToAchievedList(text);
-                    saveDataForCurrentDate();
-                });
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.log("Audio playback failed:", error);
+                        });
+                    }
+                }
                 
-                deleteButton.addEventListener('click', () => {
-                    todoList.removeChild(todoItem);
-                    saveDataForCurrentDate();
-                });
-            };
+                // Move to achieved list
+                todoList.removeChild(todoItem);
+                addToAchievedList(text);
+                saveDataForCurrentDate();
+            });
             
-            // Add an item to the achieved list
-            const addToAchievedList = (text) => {
-                const achievedItem = document.createElement('li');
-                achievedItem.className = 'achieved-item';
-                
-                const achievedText = document.createElement('span');
-                achievedText.className = 'todo-text';
-                achievedText.textContent = text;
-                
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'delete-button';
-                deleteButton.textContent = 'Remove';
-                
-                achievedItem.appendChild(achievedText);
-                achievedItem.appendChild(deleteButton);
-                achievedList.appendChild(achievedItem);
-                
-                // Hide empty message
-                emptyDayMessageEl.style.display = 'none';
-                
-                // Add event listener for delete
-                deleteButton.addEventListener('click', () => {
-                    achievedList.removeChild(achievedItem);
-                    saveDataForCurrentDate();
-                    updateAchievementCount(); // Update count when removing an item
-                });
-                
-                // Update achievement count when adding a new item
-                updateAchievementCount();
-            };
+            deleteButton.addEventListener('click', () => {
+                todoList.removeChild(todoItem);
+                saveDataForCurrentDate();
+            });
+        };
+        
+        // Add an item to the achieved list
+        const addToAchievedList = (text) => {
+            const achievedItem = document.createElement('li');
+            achievedItem.className = 'achieved-item';
             
-            // ===== Event Listeners =====
+            const achievedText = document.createElement('span');
+            achievedText.className = 'todo-text';
+            achievedText.textContent = text;
             
-            // Add new to-do when Add button is clicked
-            addButton.addEventListener('click', () => {
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'delete-button';
+            deleteButton.textContent = 'Remove';
+            
+            achievedItem.appendChild(achievedText);
+            achievedItem.appendChild(deleteButton);
+            achievedList.appendChild(achievedItem);
+            
+            // Hide empty message
+            emptyDayMessageEl.style.display = 'none';
+            
+            // Add event listener for delete
+            deleteButton.addEventListener('click', () => {
+                achievedList.removeChild(achievedItem);
+                saveDataForCurrentDate();
+                updateAchievementCount(); // Update count when removing an item
+            });
+            
+            // Update achievement count when adding a new item
+            updateAchievementCount();
+        };
+
+        
+        // Function to add random celebration GIFs to the party
+        function addRandomCelebrationGifs() {
+            // Array of celebration GIFs - add your file paths here
+            const celebrationGifs = [
+                'gifs/party-gif1.gif',  // Replace with your actual GIF paths
+                'gifs/party-gif2.gif',
+                'gifs/party-gif3.gif',
+                'gifs/party-gif4.gif',
+                'gifs/party-gif5.gif'
+                // Add more GIFs as needed
+            ];
+            
+            // Get the party container
+            const partyContainer = document.getElementById('party-celebration');
+            if (!partyContainer) return;
+            
+            // Create a container for the celebration GIFs if it doesn't exist
+            let gifContainer = document.querySelector('.celebration-gifs-container');
+            if (!gifContainer) {
+                gifContainer = document.createElement('div');
+                gifContainer.className = 'celebration-gifs-container';
+                partyContainer.appendChild(gifContainer);
+            }
+            
+            // Clear any existing GIFs
+            gifContainer.innerHTML = '';
+            
+            // Number of GIFs to add
+            const numGifsToAdd = 25; // You can change this number
+            
+            // Add random GIFs
+            for (let i = 0; i < numGifsToAdd; i++) {
+                // Select a random GIF from the array
+                const randomIndex = Math.floor(Math.random() * celebrationGifs.length);
+                const gifSrc = celebrationGifs[randomIndex];
+                
+                // Create a container for this specific GIF with animation
+                const gifElement = document.createElement('div');
+                gifElement.className = 'celebration-gif';
+                
+                // Create the image element
+                const img = document.createElement('img');
+                img.src = gifSrc;
+                img.alt = 'Celebration';
+                
+                // Add image to container
+                gifElement.appendChild(img);
+                
+                // Random position on screen
+                const topPosition = Math.floor(Math.random() * 70) + 10; // 10-80% from top
+                const leftPosition = Math.floor(Math.random() * 70) + 10; // 10-80% from left
+                
+                // Random size (50-150px)
+                const size = Math.floor(Math.random() * 100) + 50;
+                
+                // Apply styles
+                gifElement.style.position = 'absolute';
+                gifElement.style.top = `${topPosition}%`;
+                gifElement.style.left = `${leftPosition}%`;
+                gifElement.style.width = `${size}px`;
+                gifElement.style.height = `${size}px`;
+                gifElement.style.zIndex = '1005'; // Above other elements
+                
+                // Add random animation
+                const animations = [
+                    'bounce 2s infinite',
+                    'spin 3s infinite linear',
+                    'pulse 2s infinite',
+                    'wobble 3s infinite'
+                ];
+                const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                gifElement.style.animation = randomAnimation;
+                
+                // Add to container
+                gifContainer.appendChild(gifElement);
+            }
+        }
+        // Function to add dust particles to the spotlight beam
+        function addSpotlightDustEffect() {
+            // Create dust container if it doesn't exist
+            let dustContainer = document.querySelector('.spotlight-dust');
+            if (!dustContainer) {
+                dustContainer = document.createElement('div');
+                dustContainer.className = 'spotlight-dust';
+                document.querySelector('.spotlight-container').appendChild(dustContainer);
+            }
+            
+            // Clear existing particles
+            dustContainer.innerHTML = '';
+            
+            // Add new dust particles
+            const numParticles = 30;
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'dust-particle';
+                
+                // Random position within the spotlight beam
+                const leftPos = 40 + Math.random() * 20; // 40-60% from left
+                const topPos = Math.random() * 60; // 0-60% from top
+                
+                // Random size
+                const size = 1 + Math.random() * 3;
+                
+                // Random animation duration and delay
+                const duration = 3 + Math.random() * 6;
+                const delay = Math.random() * 5;
+                
+                // Apply styles
+                particle.style.left = `${leftPos}%`;
+                particle.style.top = `${topPos}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                particle.style.animation = `floatDust ${duration}s linear ${delay}s infinite`;
+                
+                // Add to container
+                dustContainer.appendChild(particle);
+            }
+
+        }
+        // Function to start the party celebration
+        function startPartyCelebration() {
+            console.log("Starting party celebration!"); // Debug log
+            
+            // Get the audio element
+            const celebrationSong = document.getElementById('celebration-song');
+            if (!celebrationSong) {
+                console.error("Could not find celebration-song element!");
+                return;
+            }
+            
+            // Show the celebration container
+            const partyCelebration = document.getElementById('party-celebration');
+            if (!partyCelebration) {
+                console.error("Could not find party-celebration element!");
+                return;
+            }
+            
+            partyCelebration.style.display = 'block';
+            // Inside your startPartyCelebration function
+            // After the line: partyCelebration.style.display = 'block';
+            addSpotlightDustEffect();
+            addRandomCelebrationGifs();
+            // Add the party mode class to the grade
+            const gradeElement = document.getElementById('weekly-grade');
+            if (gradeElement) {
+                gradeElement.classList.add('party-mode');
+            } else {
+                console.error("Could not find weekly-grade element!");
+            }
+            
+            // Add disco balls randomly around the page
+            const discoContainer = document.querySelector('.disco-container');
+            if (!discoContainer) {
+                console.error("Could not find disco-container element!");
+                return;
+            }
+            
+            discoContainer.innerHTML = ''; // Clear any existing disco balls
+            
+            // Create 15 disco balls
+            for (let i = 0; i < 15; i++) {
+                const discoBall = document.createElement('img');
+                discoBall.src = 'gifs/disco-ball.gif'; // Make sure you have this GIF
+                discoBall.className = 'disco-ball';
+                
+                // Random position
+                const randomTop = Math.floor(Math.random() * 80) + 10; // 10-90%
+                const randomLeft = Math.floor(Math.random() * 80) + 10; // 10-90%
+                
+                discoBall.style.top = `${randomTop}%`;
+                discoBall.style.left = `${randomLeft}%`;
+                
+                // Random size
+                const randomSize = Math.floor(Math.random() * 50) + 50; // 50-100px
+                discoBall.style.width = `${randomSize}px`;
+                discoBall.style.height = `${randomSize}px`;
+                
+                // Add to container
+                discoContainer.appendChild(discoBall);
+            }
+            
+            // Play the celebration song with error handling
+            celebrationSong.volume = 0.7; // 70% volume
+            celebrationSong.currentTime = 0; // Start from beginning
+            
+            try {
+                const playPromise = celebrationSong.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => {
+                        console.error("Audio playback failed:", error);
+                    });
+                }
+            } catch (e) {
+                console.error("Error playing audio:", e);
+            }
+            
+            // Set up event listener for close button
+            const closePartyButton = document.getElementById('close-party');
+            if (closePartyButton) {
+                // Remove existing listeners to prevent duplicates
+                const newCloseButton = closePartyButton.cloneNode(true);
+                closePartyButton.parentNode.replaceChild(newCloseButton, closePartyButton);
+                newCloseButton.addEventListener('click', stopPartyCelebration);
+            } else {
+                console.error("Could not find close-party button!");
+            }
+        }
+        
+        // Function to stop the party
+        function stopPartyCelebration() {
+            console.log("Stopping party celebration!"); // Debug log
+            
+            // Get elements
+            const partyCelebration = document.getElementById('party-celebration');
+            const celebrationSong = document.getElementById('celebration-song');
+            const gradeElement = document.getElementById('weekly-grade');
+            
+            // Hide the celebration container
+            if (partyCelebration) {
+                partyCelebration.style.display = 'none';
+            }
+            
+            // Stop the music
+            if (celebrationSong) {
+                celebrationSong.pause();
+            }
+            
+            // Remove party mode class
+            if (gradeElement) {
+                gradeElement.classList.remove('party-mode');
+            }
+        }
+        
+        // Function to show retro stats window with added party celebration check
+        function showRetroStatsWindow() {
+            console.log("Showing stats window"); // Debug log
+            
+            // Get the last 7 days of data
+            const last7DaysData = getLast7DaysData();
+            
+            // Calculate total and determine grade
+            const totalAchievements = calculateTotalAchievements(last7DaysData);
+            const grade = determineGrade(totalAchievements);
+            
+            // Update the grade display
+            updateGradeDisplay(grade, totalAchievements);
+            
+            // Generate the graph
+            generateGraph(last7DaysData);
+            
+            // Show the window and overlay
+            document.getElementById('retro-stats-window').style.display = 'block';
+            document.getElementById('retro-window-overlay').style.display = 'block';
+            
+            // Check if grade is A+ after a short delay to ensure the DOM is updated
+            setTimeout(() => {
+                const gradeElement = document.getElementById('weekly-grade');
+                console.log("Grade element text:", gradeElement ? gradeElement.textContent : 'not found');
+                
+                if (gradeElement && gradeElement.textContent === 'A+') {
+                    console.log("A+ grade detected! Starting party...");
+                    startPartyCelebration();
+                }
+            }, 500);
+        }
+        
+        // Function to close retro stats window with added party cleanup
+        function closeRetroStatsWindow() {
+            console.log("Closing stats window"); // Debug log
+            
+            // Stop the party if it's active
+            stopPartyCelebration();
+            
+            // Hide the window and overlay
+            document.getElementById('retro-stats-window').style.display = 'none';
+            document.getElementById('retro-window-overlay').style.display = 'none';
+        }
+        
+        // ===== Event Listeners =====
+        
+        // Add new to-do when Add button is clicked
+        addButton.addEventListener('click', () => {
+            const text = todoInput.value.trim();
+            if (text) {
+                addTodoToDOM(text);
+                todoInput.value = '';
+                saveDataForCurrentDate();
+            }
+        });
+        
+        // Add new to-do when Enter key is pressed
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
                 const text = todoInput.value.trim();
                 if (text) {
                     addTodoToDOM(text);
                     todoInput.value = '';
                     saveDataForCurrentDate();
                 }
-            });
-            
-            // Add new to-do when Enter key is pressed
-            todoInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    const text = todoInput.value.trim();
-                    if (text) {
-                        addTodoToDOM(text);
-                        todoInput.value = '';
-                        saveDataForCurrentDate();
-                    }
-                }
-            });
-            
-            // Previous day navigation
-            prevDateBtn.addEventListener('click', goToPrevDay);
-            
-            // Next day navigation
-            nextDateBtn.addEventListener('click', goToNextDay);
-            
-            // Open calendar
-            openCalendarBtn.addEventListener('click', () => {
-                // Set calendar to current view month/year
-                currentCalendarMonth = new Date(currentDate);
-                updateCalendarView();
-                datePickerEl.style.display = 'block';
-            });
-            
-            // Close calendar
-            closeCalendarBtn.addEventListener('click', () => {
-                datePickerEl.style.display = 'none';
-            });
-            
-            // Previous month in calendar
-            prevMonthBtn.addEventListener('click', () => {
-                currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() - 1);
-                updateCalendarView();
-            });
-            
-            // Next month in calendar
-            nextMonthBtn.addEventListener('click', () => {
-                currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() + 1);
-                updateCalendarView();
-            });
-            
-            // Stats window events
-            cornerGif.addEventListener('click', showRetroStatsWindow);
-            closeStatsBtn.addEventListener('click', closeRetroStatsWindow);
-            overlay.addEventListener('click', closeRetroStatsWindow);
-            
-            // Initialize the app
-            updateDateDisplay();
-            loadDataForCurrentDate();
-            
-            // Hide date picker initially
+            }
+        });
+        
+        // Previous day navigation
+        prevDateBtn.addEventListener('click', goToPrevDay);
+        
+        // Next day navigation
+        nextDateBtn.addEventListener('click', goToNextDay);
+        
+        // Open calendar
+        openCalendarBtn.addEventListener('click', () => {
+            // Set calendar to current view month/year
+            currentCalendarMonth = new Date(currentDate);
+            updateCalendarView();
+            datePickerEl.style.display = 'block';
+        });
+        
+        // Close calendar
+        closeCalendarBtn.addEventListener('click', () => {
             datePickerEl.style.display = 'none';
         });
+        
+        // Previous month in calendar
+        prevMonthBtn.addEventListener('click', () => {
+            currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() - 1);
+            updateCalendarView();
+        });
+        
+        // Next month in calendar
+        nextMonthBtn.addEventListener('click', () => {
+            currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() + 1);
+            updateCalendarView();
+        });
+        
+        // Stats window events
+        cornerGif.addEventListener('click', showRetroStatsWindow);
+        closeStatsBtn.addEventListener('click', closeRetroStatsWindow);
+        overlay.addEventListener('click', closeRetroStatsWindow);
+        
+        // Initialize the app
+        updateDateDisplay();
+        loadDataForCurrentDate();
+        
+        // Hide date picker initially
+        datePickerEl.style.display = 'none';
+        
+        // FOR TESTING ONLY - Uncomment to test the party celebration
+        // setTimeout(() => { startPartyCelebration(); }, 3000);
+        
+        // Check for required elements and log to console
+        console.log("Checking for required elements...");
+        ["celebration-song", "party-celebration", "weekly-grade", "close-party", "disco-container"].forEach(id => {
+            console.log(`Element '${id}': ${document.getElementById(id) ? 'Found ✓' : 'MISSING ❌'}`);
+        });
+    });
     </script>
+    
+    
 </body>
 </html>
