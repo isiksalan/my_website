@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>to-do </title>
+    <title>to-do with dates</title>
     <link rel="icon" href="images/logo.gif" type="image/gif">
     <style>
     
@@ -41,7 +40,7 @@
         width: 100%;
         max-width: 1000px;
         position: relative;
-        margin-top: 70px; /* Give space for the fixed header */
+        margin-top: 130px; /* Increased to accommodate date selector */
         background-image: url("backgrounds/back-786.gif");
         background-repeat: repeat;
         background-size: auto;
@@ -51,7 +50,6 @@
         border-width: 3px;
         border-color: #5aff5a;
         border-style: dashed;
-
     }
 
     .notebook-container {
@@ -397,7 +395,7 @@
         border-color: #c71585 #fff #fff #c71585;
     }  
 
-        /* Updated Corner GIF styling with hover effects */
+    /* Updated Corner GIF styling with hover effects */
     .corner-gif {
         position: absolute;
         top: -65px;   
@@ -457,6 +455,7 @@
         font-size: 0.7rem;
         margin-top: 3px;
     }
+    
     /* Show tooltip on hover */
     .corner-gif:hover .achievement-tooltip {
         opacity: 1;
@@ -464,7 +463,485 @@
         transform: rotate(-5deg) translateY(-5px);
     }
 
+    /* NEW: Date selector styling */
+    .date-selector {
+        position: fixed;
+        top: 60px; /* Below the header */
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 173, 244, 0.85);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        z-index: 99;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        border-bottom: 2px dashed #29ff7e;
+    }
 
+    .date-selector-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 5px 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        border: 2px solid #ff6ec7;
+        box-shadow: 0 0 10px rgba(255, 0, 191, 0.3);
+    }
+
+    .date-display {
+        font-size: 0.8rem;
+        color: #800080;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        padding: 0 15px;
+    }
+
+    .date-number {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #ff1493;
+    }
+
+    .date-day {
+        font-size: 0.7rem;
+        color: #9400d3;
+        margin-top: 3px;
+    }
+
+    .date-nav-button {
+        background: linear-gradient(to bottom, #e0f2ff, #87cefa);
+        color: #000080;
+        border: 2px solid;
+        border-color: #fff #999 #999 #fff;
+        border-radius: 5px;
+        padding: 5px 8px;
+        font-size: 0.6rem;
+        cursor: pointer;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+        transition: all 0.2s ease;
+    }
+
+    .date-nav-button:hover {
+        background: linear-gradient(to bottom, #cfe9ff, #1e90ff);
+        transform: translateY(-2px);
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+
+    .date-nav-button:active {
+        border-color: #999 #fff #fff #999;
+        background: linear-gradient(to bottom, #87cefa, #1e90ff);
+        transform: translateY(1px);
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+
+    /* Calendar icon */
+    .calendar-button {
+        background: linear-gradient(to bottom, #ffec64, #ffab23);
+        color: #8f5000;
+        border: 2px solid;
+        border-color: #fff #cc7722 #cc7722 #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 0.6rem;
+        cursor: pointer;
+        box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .calendar-button:hover {
+        background: linear-gradient(to bottom, #ffdd7f, #ff9505);
+        transform: translateY(-2px);
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    }
+
+    .calendar-button:active {
+        border-color: #cc7722 #fff #fff #cc7722;
+        background: linear-gradient(to bottom, #ffab23, #ff8c00);
+        transform: translateY(1px);
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    }
+
+    .calendar-icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Date picker styling */
+    .date-picker-container {
+        display: none;
+        position: fixed;
+        top: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 200;
+        background: linear-gradient(to bottom, #ffe0f0, #ffc0cb);
+        border: 3px solid #ff69b4;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        padding: 15px;
+        width: 300px;
+    }
+
+    .date-picker-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .month-selector {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .month-nav {
+        background: linear-gradient(to bottom, #e0f2ff, #87cefa);
+        color: #000080;
+        border: 2px solid;
+        border-color: #fff #999 #999 #fff;
+        border-radius: 5px;
+        padding: 3px 5px;
+        font-size: 0.6rem;
+        cursor: pointer;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .month-title {
+        font-size: 0.8rem;
+        color: #800080;
+        text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 2px;
+    }
+
+    .day-header {
+        text-align: center;
+        font-size: 0.6rem;
+        color: #8b008b;
+        padding: 3px 0;
+    }
+
+    .calendar-day {
+        text-align: center;
+        font-size: 0.7rem;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .calendar-day.other-month {
+        color: #999;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .calendar-day.current-month {
+        color: #333;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ccc;
+    }
+
+    .calendar-day.selected {
+        background: linear-gradient(to bottom, #ff7eb9, #ff2e9f);
+        color: white;
+        border: 1px solid #ff1493;
+        box-shadow: 0 0 5px rgba(255, 20, 147, 0.5);
+    }
+
+    .calendar-day.has-tasks {
+        position: relative;
+    }
+
+    .calendar-day.has-tasks::after {
+        content: '';
+        position: absolute;
+        
+        bottom: 2px;
+        left: 20%;
+        /*transform: translateX(-50%);*/
+        width: 20px;
+        height: 20px;
+        background-color: rgba(255, 0, 170, 0.3);
+        /*border-radius: 50%;*/
+    }
+
+    .calendar-day:hover:not(.other-month) {
+        background-color: rgba(255, 182, 193, 0.7);
+        transform: scale(1.1);
+        box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    }
+
+    .close-calendar {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        /*color: #ff1493;*/
+        color: #ff1493;
+        cursor: pointer;
+    }
+
+    /* Welcome message styling */
+    .welcome-message {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 0.8rem;
+        color: #000000;
+    }
+        
+        .retro-window-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 300;
+        }
+
+        /* Retro window styling */
+        .retro-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            max-width: 90%;
+            background: linear-gradient(to bottom, #e6e6e6, #c1c1c1);
+            border: 3px solid;
+            border-color: #fff #999 #999 #fff;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 301;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .retro-window-titlebar {
+            background: linear-gradient(to right, #000080, #0078d7);
+            padding: 5px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 0.8rem;
+            border-bottom: 2px solid #fff;
+        }
+
+        .retro-window-title {
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+        }
+
+        .retro-window-close {
+            background: #ff5555;
+            color: white;
+            border: 2px solid;
+            border-color: #fff #999 #999 #fff;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 3px;
+            font-size: 1rem;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .retro-window-close:hover {
+            background: #ff0000;
+        }
+
+        .retro-window-close:active {
+            border-color: #999 #fff #fff #999;
+            background: #cc0000;
+        }
+
+        .retro-window-content {
+            padding: 15px;
+            background-color: #f0f0f0;
+            background-image: url('backgrounds/back-765.gif');
+            background-size: auto;
+            background-repeat: repeat;
+        }
+
+        /* Grade display */
+        .retro-stats-grade-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            border: 2px dashed #ff69b4;
+            border-radius: 10px;
+        }
+
+        .retro-stats-grade-label {
+            font-size: 0.8rem;
+            color: #800080;
+        }
+
+        .retro-stats-grade {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(to bottom, #ffcc00, #ff6600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+        }
+
+        /* Graph styles */
+        .retro-graph-container {
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #00bfff;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .retro-graph-title {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #800080;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+        }
+
+        .retro-graph {
+            height: 180px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid #ccc;
+            padding: 5px;
+            position: relative;
+        }
+
+        /* Y-axis grid lines */
+        .retro-graph::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 29px,
+                rgba(0, 0, 0, 0.1) 29px,
+                rgba(0, 0, 0, 0.1) 30px
+            );
+            pointer-events: none;
+        }
+
+        .graph-bar {
+            width: 30px;
+            background: linear-gradient(to top, #ff3366, #ff66cc);
+            border: 2px solid;
+            border-color: #fff #999 #999 #fff;
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .graph-bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #800080;
+            font-size: 0.6rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 4px;
+            border-radius: 3px;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .days-legend {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+
+        .day-label {
+            font-size: 0.6rem;
+            color: #333;
+            text-align: center;
+            width: 30px;
+        }
+
+        /* Y-axis labels */
+        .y-axis-labels {
+            position: absolute;
+            left: -25px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            font-size: 0.5rem;
+            color: #800080;
+        }
+
+        .y-label {
+            transform: translateY(50%);
+        }
+
+        /* Total achievements display */
+        .retro-stats-total {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            border: 2px dashed #00ff00;
+            border-radius: 8px;
+        }
+
+        .retro-stats-total-label {
+            font-size: 0.7rem;
+            color: #006400;
+        }
+
+        .retro-stats-total-value {
+            font-size: 1.5rem;
+            color: #ff4500;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Different grade colors */
+        .grade-ap { background: linear-gradient(to bottom, #ffcc00, #ff6600); }
+        .grade-a { background: linear-gradient(to bottom, #ffff00, #ffa500); }
+        .grade-bp { background: linear-gradient(to bottom, #adff2f, #32cd32); }
+        .grade-b { background: linear-gradient(to bottom, #90ee90, #2e8b57); }
+        .grade-cp { background: linear-gradient(to bottom, #00bfff, #1e90ff); }
+        .grade-c { background: linear-gradient(to bottom, #87ceeb, #4169e1); }
+        .grade-dp { background: linear-gradient(to bottom, #da70d6, #9932cc); }
+        .grade-d { background: linear-gradient(to bottom, #dda0dd, #8b008b); }
+        .grade-fp { background: linear-gradient(to bottom, #ff69b4, #ff1493); }
+        .grade-f { background: linear-gradient(to bottom, #ff6347, #dc143c); }
     /* Responsive design for smaller screens */
     @media (max-width: 768px) {
         .tasks-container {
@@ -484,10 +961,23 @@
             max-width: none;
             top: 0;
         }
-    }
 
+        .date-selector-inner {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .date-display {
+            padding: 5px 0;
+        }
+
+        .date-picker-container {
+            width: 90%;
+            max-width: 300px;
+        }}
     </style>
 </head>
+
 <body>
     <!-- Fixed header with button -->
     <div class="header-container">
@@ -498,11 +988,47 @@
             </button>
         </div>
     </div>
+    <audio id="celebration-music" src="music/clapping.wav" preload="auto"></audio>
+    <!-- NEW: Date selector -->
+    <div class="date-selector">
+        <div class="date-selector-inner">
+            <button class="date-nav-button" id="prev-date">◀ Prev</button>
+            <div class="date-display">
+                <div class="date-number" id="date-display">05/17/25</div>
+                <div class="date-day" id="day-display">Saturday</div>
+            </div>
+            <button class="date-nav-button" id="next-date">Next ▶</button>
+            <button class="calendar-button" id="open-calendar">
+                <img src="gifs/calendar-icon.gif" alt="Calendar" class="calendar-icon"> Calendar
+            </button>
+        </div>
+    </div>
+
+    <!-- Date picker container (hidden by default) -->
+    <div class="date-picker-container" id="date-picker">
+        <button class="close-calendar" id="close-calendar">×</button>
+        <div class="date-picker-header">
+            <div class="month-selector">
+                <button class="month-nav" id="prev-month">◀</button>
+                <div class="month-title" id="month-year-display">May 2025</div>
+                <button class="month-nav" id="next-month">▶</button>
+            </div>
+        </div>
+        <div class="calendar-grid">
+            <div class="day-header">Su</div>
+            <div class="day-header">Mo</div>
+            <div class="day-header">Tu</div>
+            <div class="day-header">We</div>
+            <div class="day-header">Th</div>
+            <div class="day-header">Fr</div>
+            <div class="day-header">Sa</div>
+            <!-- Calendar days will be added here via JavaScript -->
+        </div>
+    </div>
 
     <!-- New container for the side-by-side layout -->
     <div class="tasks-container">
-
-    <!-- Update your corner-gif div to include the tooltip -->
+        <!-- Update your corner-gif div to include the tooltip -->
         <div class="corner-gif" id="corner-gif-container">
             <img src="gifs/britney-sits.gif" alt="Corner decoration">
             <div class="achievement-tooltip" id="achievement-counter">
@@ -510,7 +1036,36 @@
                 <div id="goal-count">0 goals!</div>
             </div>
         </div>
-    
+        <div id="retro-stats-window" class="retro-window" style="display: none;">
+                <div class="retro-window-titlebar">
+                    <div class="retro-window-title">✨ Achievement Stats ✨</div>
+                    <button class="retro-window-close" id="close-stats-window">×</button>
+                </div>
+                <div class="retro-window-content">
+                    <div class="retro-stats-grade-container">
+                        <div class="retro-stats-grade-label">Weekly Grade:</div>
+                        <div class="retro-stats-grade" id="weekly-grade">A+</div>
+                    </div>
+                    <div class="retro-graph-container">
+                        <div class="retro-graph-title">Last 7 Days Achievements</div>
+                        <div class="retro-graph" id="achievements-graph">
+                            <!-- Graph bars will be generated here -->
+                        </div>
+                        <div class="retro-graph-legend">
+                            <div class="days-legend" id="days-legend">
+                                <!-- Day labels will be generated here -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="retro-stats-total">
+                        <div class="retro-stats-total-label">Total Achievements:</div>
+                        <div class="retro-stats-total-value" id="total-achievements">21</div>
+                    </div>
+                </div>
+        </div>
+            
+        <!-- Overlay for the retro window -->
+        <div id="retro-window-overlay" class="retro-window-overlay" style="display: none;"></div>
         <!-- To-do list container -->
         <div class="notebook-container">
             <div class="todo-header">
@@ -520,6 +1075,11 @@
                     <img src="gifs/colorful-stars.gif" alt="✨" class="tiny-gif">
                 </div>
             </div>
+            <!-- Welcome message for empty days -->
+            <div class="welcome-message" id="empty-day-message" style="display: none;">
+                No tasks yet.. How could that be?!
+            </div>
+            
             <div class="todo-input-container">
                 <input type="text" id="todo-input" placeholder="Add a new task...">
                 <button id="add-button">Add</button>
@@ -543,7 +1103,6 @@
             </ul>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Set the background image for the body
@@ -555,14 +1114,243 @@
             
             setBackgroundImage();
             
+            // DOM elements
             const todoInput = document.getElementById('todo-input');
             const addButton = document.getElementById('add-button');
             const todoList = document.getElementById('todo-list');
             const achievedList = document.getElementById('achieved-list');
+            const dateDisplayEl = document.getElementById('date-display');
+            const dayDisplayEl = document.getElementById('day-display');
+            const prevDateBtn = document.getElementById('prev-date');
+            const nextDateBtn = document.getElementById('next-date');
+            const openCalendarBtn = document.getElementById('open-calendar');
+            const datePickerEl = document.getElementById('date-picker');
+            const closeCalendarBtn = document.getElementById('close-calendar');
+            const prevMonthBtn = document.getElementById('prev-month');
+            const nextMonthBtn = document.getElementById('next-month');
+            const monthYearDisplayEl = document.getElementById('month-year-display');
+            const calendarGridEl = document.querySelector('.calendar-grid');
+            const emptyDayMessageEl = document.getElementById('empty-day-message');
+            const cornerGif = document.querySelector('.corner-gif');
+            const closeStatsBtn = document.getElementById('close-stats-window');
+            const overlay = document.getElementById('retro-window-overlay');
             
-            // Function to update achievement count
+            // Date management
+            let currentDate = new Date(); // Default to today
+            let currentCalendarMonth = new Date(); // For the calendar view
+            
+            // Format date as MM/DD/YY string
+            const formatDateDisplay = (date) => {
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const year = String(date.getFullYear()).slice(-2);
+                return `${month}/${day}/${year}`;
+            };
+            
+            // Get day name
+            const getDayName = (date) => {
+                const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                return days[date.getDay()];
+            };
+            
+            // Format date as YYYY-MM-DD for storage key
+            const formatDateForStorage = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+            
+            // Function to show retro stats window
+            function showRetroStatsWindow() {
+                // Get the last 7 days of data
+                const last7DaysData = getLast7DaysData();
+                
+                // Calculate total and determine grade
+                const totalAchievements = calculateTotalAchievements(last7DaysData);
+                const grade = determineGrade(totalAchievements);
+                
+                // Update the grade display
+                updateGradeDisplay(grade, totalAchievements);
+                
+                // Generate the graph
+                generateGraph(last7DaysData);
+                
+                // Show the window and overlay
+                document.getElementById('retro-stats-window').style.display = 'block';
+                document.getElementById('retro-window-overlay').style.display = 'block';
+            }
 
+            // Function to get achievement data for the last 7 days
+            function getLast7DaysData() {
+                const data = [];
+                const today = new Date();
+                
+                for (let i = 6; i >= 0; i--) {
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - i);
+                    
+                    const dateKey = formatDateForStorage(date);
+                    const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
+                    
+                    const achievementCount = dateData && dateData.achieved ? dateData.achieved.length : 0;
+                    
+                    data.push({
+                        date: date,
+                        count: achievementCount
+                    });
+                }
+                
+                return data;
+            }
 
+            // Calculate total achievements across all days
+            function calculateTotalAchievements(daysData) {
+                return daysData.reduce((total, day) => total + day.count, 0);
+            }
+
+            // Determine grade based on total achievements
+            function determineGrade(total) {
+                if (total >= 21) return { letter: 'A+', class: 'grade-ap' };
+                if (total >= 17) return { letter: 'A', class: 'grade-a' };
+                if (total >= 14) return { letter: 'B+', class: 'grade-bp' };
+                if (total >= 8) return { letter: 'B', class: 'grade-b' };
+                if (total >= 7) return { letter: 'C+', class: 'grade-cp' };
+                if (total >= 4) return { letter: 'C-', class: 'grade-c' };
+                if (total >= 3) return { letter: 'D+', class: 'grade-dp' };
+                if (total >= 2) return { letter: 'D-', class: 'grade-d' };
+                if (total >= 1) return { letter: 'F+', class: 'grade-fp' };
+                return { letter: 'F-', class: 'grade-f' };
+            }
+
+            // Update the grade display
+            function updateGradeDisplay(grade, totalAchievements) {
+                const gradeElement = document.getElementById('weekly-grade');
+                gradeElement.textContent = grade.letter;
+                
+                // Remove any existing grade classes
+                gradeElement.className = 'retro-stats-grade';
+                
+                // Add the appropriate grade class
+                gradeElement.classList.add(grade.class);
+                
+                // Update total achievements
+                document.getElementById('total-achievements').textContent = totalAchievements;
+            }
+
+            // Generate the graph for the last 7 days
+            function generateGraph(daysData) {
+                const graphContainer = document.getElementById('achievements-graph');
+                const daysLegend = document.getElementById('days-legend');
+                
+                // Clear existing content
+                graphContainer.innerHTML = '';
+                daysLegend.innerHTML = '';
+                
+                // Find the maximum achievement count to scale the graph
+                const maxCount = Math.max(...daysData.map(day => day.count));
+                const graphHeight = 180; // Same as the CSS height
+                const scale = maxCount > 0 ? graphHeight / maxCount : 0;
+                
+                // Add Y-axis labels
+                const yAxisLabels = document.createElement('div');
+                yAxisLabels.className = 'y-axis-labels';
+                
+                // If we have data, create labels
+                if (maxCount > 0) {
+                    // Create 6 evenly spaced labels
+                    const labelCount = 6;
+                    for (let i = 0; i < labelCount; i++) {
+                        const value = Math.round((maxCount / (labelCount - 1)) * (labelCount - 1 - i));
+                        const label = document.createElement('div');
+                        label.className = 'y-label';
+                        label.textContent = value;
+                        yAxisLabels.appendChild(label);
+                    }
+                } else {
+                    // If no data, just show one label
+                    const label = document.createElement('div');
+                    label.className = 'y-label';
+                    label.textContent = '0';
+                    yAxisLabels.appendChild(label);
+                }
+                
+                graphContainer.appendChild(yAxisLabels);
+                
+                // Add bars for each day
+                daysData.forEach((day, index) => {
+                    // Create bar
+                    const bar = document.createElement('div');
+                    bar.className = 'graph-bar';
+                    
+                    // Calculate bar height based on count
+                    const height = day.count * scale;
+                    bar.style.height = `${height}px`;
+                    
+                    // Add value label
+                    const valueLabel = document.createElement('div');
+                    valueLabel.className = 'graph-bar-value';
+                    valueLabel.textContent = day.count;
+                    bar.appendChild(valueLabel);
+                    
+                    // Add bar to container
+                    graphContainer.appendChild(bar);
+                    
+                    // Add day label
+                    const dayLabel = document.createElement('div');
+                    dayLabel.className = 'day-label';
+                    
+                    // Get short day name (Sun, Mon, etc.)
+                    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                    dayLabel.textContent = dayNames[day.date.getDay()];
+                    
+                    daysLegend.appendChild(dayLabel);
+                });
+            }
+
+            // Close the stats window
+            function closeRetroStatsWindow() {
+                document.getElementById('retro-stats-window').style.display = 'none';
+                document.getElementById('retro-window-overlay').style.display = 'none';
+            }
+            
+            // Update date display
+            const updateDateDisplay = () => {
+                dateDisplayEl.textContent = formatDateDisplay(currentDate);
+                dayDisplayEl.textContent = getDayName(currentDate);
+                
+                // Also update the calendar if it's open
+                if (datePickerEl.style.display === 'block') {
+                    updateCalendarView();
+                }
+            };
+            
+            // Navigate to the previous day
+            const goToPrevDay = () => {
+                const newDate = new Date(currentDate);
+                newDate.setDate(newDate.getDate() - 1);
+                currentDate = newDate;
+                updateDateDisplay();
+                loadDataForCurrentDate();
+            };
+            
+            // Navigate to the next day
+            const goToNextDay = () => {
+                const newDate = new Date(currentDate);
+                newDate.setDate(newDate.getDate() + 1);
+                currentDate = newDate;
+                updateDateDisplay();
+                loadDataForCurrentDate();
+            };
+            
+            // Navigate to specific date
+            const goToDate = (date) => {
+                currentDate = new Date(date);
+                updateDateDisplay();
+                loadDataForCurrentDate();
+            };
+            
+            // Function to update achievement count for the current date
             const updateAchievementCount = () => {
                 const goalCount = document.getElementById('goal-count');
                 if (goalCount) {
@@ -570,38 +1358,188 @@
                     goalCount.textContent = `${count} goal${count !== 1 ? 's' : ''}!`;
                 }
             };
-                        
-            // Load saved data from localStorage
-            const loadData = () => {
-                const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
-                savedTodos.forEach(todo => {
-                    addTodoToDOM(todo.text);
-                });
+            
+            // Check if a date has any tasks
+            const dateHasTasks = (date) => {
+                const dateKey = formatDateForStorage(date);
+                const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
+                if (!dateData) return false;
                 
-                const savedAchieved = JSON.parse(localStorage.getItem('achieved') || '[]');
-                savedAchieved.forEach(item => {
-                    addToAchievedList(item.text);
-                });
+                return (dateData.todos && dateData.todos.length > 0) || 
+                    (dateData.achieved && dateData.achieved.length > 0);
+            };
+            
+            // Load data for the current date
+            const loadDataForCurrentDate = () => {
+                // Clear existing lists
+                todoList.innerHTML = '';
+                achievedList.innerHTML = '';
                 
-                // Update achievement count after loading data
+                const dateKey = formatDateForStorage(currentDate);
+                const dateData = JSON.parse(localStorage.getItem(`todoData_${dateKey}`) || 'null');
+                
+                if (dateData) {
+                    // Load todos
+                    if (dateData.todos && dateData.todos.length > 0) {
+                        dateData.todos.forEach(todo => {
+                            addTodoToDOM(todo.text);
+                        });
+                        emptyDayMessageEl.style.display = 'none';
+                    }
+                    
+                    // Load achieved
+                    if (dateData.achieved && dateData.achieved.length > 0) {
+                        dateData.achieved.forEach(item => {
+                            addToAchievedList(item.text);
+                        });
+                        emptyDayMessageEl.style.display = 'none';
+                    }
+                    
+                    // Show empty message if no tasks
+                    if ((!dateData.todos || dateData.todos.length === 0) && 
+                        (!dateData.achieved || dateData.achieved.length === 0)) {
+                        emptyDayMessageEl.style.display = 'block';
+                    }
+                } else {
+                    // No data for this date
+                    emptyDayMessageEl.style.display = 'block';
+                }
+                
+                // Update achievement count
                 updateAchievementCount();
             };
             
-            // Save to-dos to localStorage
-            const saveData = () => {
+            // Save data for the current date
+            const saveDataForCurrentDate = () => {
+                const dateKey = formatDateForStorage(currentDate);
+                
                 const todos = Array.from(todoList.children).map(item => {
                     return {
                         text: item.querySelector('.todo-text').textContent
                     };
                 });
-                localStorage.setItem('todos', JSON.stringify(todos));
                 
                 const achieved = Array.from(achievedList.children).map(item => {
                     return {
                         text: item.querySelector('.todo-text').textContent
                     };
                 });
-                localStorage.setItem('achieved', JSON.stringify(achieved));
+                
+                const dateData = { todos, achieved };
+                localStorage.setItem(`todoData_${dateKey}`, JSON.stringify(dateData));
+                
+                // Handle empty day message visibility
+                if (todos.length === 0 && achieved.length === 0) {
+                    emptyDayMessageEl.style.display = 'block';
+                } else {
+                    emptyDayMessageEl.style.display = 'none';
+                }
+                
+                // Update the calendar if it's open
+                if (datePickerEl.style.display === 'block') {
+                    updateCalendarView();
+                }
+            };
+            
+            // Generate and update the calendar view
+            const updateCalendarView = () => {
+                // Clear out days from the previous render, but keep the header row
+                const dayElements = calendarGridEl.querySelectorAll('.calendar-day');
+                dayElements.forEach(el => el.remove());
+                
+                // Get first day of the month and last day of the month
+                const firstDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 1);
+                const lastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, 0);
+                
+                // Update month/year display
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                    'July', 'August', 'September', 'October', 'November', 'December'];
+                monthYearDisplayEl.textContent = `${monthNames[currentCalendarMonth.getMonth()]} ${currentCalendarMonth.getFullYear()}`;
+                
+                // Get the day of week the first day falls on (0 = Sunday, 6 = Saturday)
+                const firstDayOfWeek = firstDay.getDay();
+                
+                // Get some days from the previous month to fill the calendar grid
+                const daysFromPrevMonth = firstDayOfWeek;
+                const prevMonthLastDay = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), 0).getDate();
+                
+                // Generate previous month days
+                for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
+                    const dayNum = prevMonthLastDay - i;
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day other-month';
+                    dayElement.textContent = dayNum;
+                    
+                    // Create date object for this day
+                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() - 1, dayNum);
+                    
+                    // Check if this date has tasks
+                    if (dateHasTasks(dayDate)) {
+                        dayElement.classList.add('has-tasks');
+                    }
+                    
+                    dayElement.addEventListener('click', () => {
+                        goToDate(dayDate);
+                        datePickerEl.style.display = 'none';
+                    });
+                    
+                    calendarGridEl.appendChild(dayElement);
+                }
+                
+                // Generate current month days
+                for (let i = 1; i <= lastDay.getDate(); i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day current-month';
+                    dayElement.textContent = i;
+                    
+                    // Create date object for this day
+                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth(), i);
+                    
+                    // Check if this is the selected date
+                    if (dayDate.getDate() === currentDate.getDate() && 
+                        dayDate.getMonth() === currentDate.getMonth() && 
+                        dayDate.getFullYear() === currentDate.getFullYear()) {
+                        dayElement.classList.add('selected');
+                    }
+                    
+                    // Check if this date has tasks
+                    if (dateHasTasks(dayDate)) {
+                        dayElement.classList.add('has-tasks');
+                    }
+                    
+                    dayElement.addEventListener('click', () => {
+                        goToDate(dayDate);
+                        datePickerEl.style.display = 'none';
+                    });
+                    
+                    calendarGridEl.appendChild(dayElement);
+                }
+                
+                // Calculate how many days we need from the next month to complete the grid
+                const totalDaysDisplayed = daysFromPrevMonth + lastDay.getDate();
+                const daysFromNextMonth = Math.ceil(totalDaysDisplayed / 7) * 7 - totalDaysDisplayed;
+                
+                // Generate next month days
+                for (let i = 1; i <= daysFromNextMonth; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'calendar-day other-month';
+                    dayElement.textContent = i;
+                    
+                    // Create date object for this day
+                    const dayDate = new Date(currentCalendarMonth.getFullYear(), currentCalendarMonth.getMonth() + 1, i);
+                    
+                    // Check if this date has tasks
+                    if (dateHasTasks(dayDate)) {
+                        dayElement.classList.add('has-tasks');
+                    }
+                    
+                    dayElement.addEventListener('click', () => {
+                        goToDate(dayDate);
+                        datePickerEl.style.display = 'none';
+                    });
+                    
+                    calendarGridEl.appendChild(dayElement);
+                }
             };
             
             // Add a new to-do item to the DOM
@@ -631,17 +1569,24 @@
                 todoItem.appendChild(buttonContainer);
                 todoList.appendChild(todoItem);
                 
+                // Hide empty message
+                emptyDayMessageEl.style.display = 'none';
+                const music = document.getElementById('celebration-music');
+                music.currentTime = 0; // Reset to beginning
+                music.volume = 0.6; // Set volume to 60%
+                
                 // Add event listeners
                 doneButton.addEventListener('click', () => {
+                    const playPromise = music.play();
                     // Move to achieved list
                     todoList.removeChild(todoItem);
                     addToAchievedList(text);
-                    saveData();
+                    saveDataForCurrentDate();
                 });
                 
                 deleteButton.addEventListener('click', () => {
                     todoList.removeChild(todoItem);
-                    saveData();
+                    saveDataForCurrentDate();
                 });
             };
             
@@ -662,10 +1607,13 @@
                 achievedItem.appendChild(deleteButton);
                 achievedList.appendChild(achievedItem);
                 
+                // Hide empty message
+                emptyDayMessageEl.style.display = 'none';
+                
                 // Add event listener for delete
                 deleteButton.addEventListener('click', () => {
                     achievedList.removeChild(achievedItem);
-                    saveData();
+                    saveDataForCurrentDate();
                     updateAchievementCount(); // Update count when removing an item
                 });
                 
@@ -673,13 +1621,15 @@
                 updateAchievementCount();
             };
             
+            // ===== Event Listeners =====
+            
             // Add new to-do when Add button is clicked
             addButton.addEventListener('click', () => {
                 const text = todoInput.value.trim();
                 if (text) {
                     addTodoToDOM(text);
                     todoInput.value = '';
-                    saveData();
+                    saveDataForCurrentDate();
                 }
             });
             
@@ -690,13 +1640,53 @@
                     if (text) {
                         addTodoToDOM(text);
                         todoInput.value = '';
-                        saveData();
+                        saveDataForCurrentDate();
                     }
                 }
             });
             
-            // Load saved data when page loads
-            loadData();
+            // Previous day navigation
+            prevDateBtn.addEventListener('click', goToPrevDay);
+            
+            // Next day navigation
+            nextDateBtn.addEventListener('click', goToNextDay);
+            
+            // Open calendar
+            openCalendarBtn.addEventListener('click', () => {
+                // Set calendar to current view month/year
+                currentCalendarMonth = new Date(currentDate);
+                updateCalendarView();
+                datePickerEl.style.display = 'block';
+            });
+            
+            // Close calendar
+            closeCalendarBtn.addEventListener('click', () => {
+                datePickerEl.style.display = 'none';
+            });
+            
+            // Previous month in calendar
+            prevMonthBtn.addEventListener('click', () => {
+                currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() - 1);
+                updateCalendarView();
+            });
+            
+            // Next month in calendar
+            nextMonthBtn.addEventListener('click', () => {
+                currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() + 1);
+                updateCalendarView();
+            });
+            
+            // Stats window events
+            cornerGif.addEventListener('click', showRetroStatsWindow);
+            closeStatsBtn.addEventListener('click', closeRetroStatsWindow);
+            overlay.addEventListener('click', closeRetroStatsWindow);
+            
+            // Initialize the app
+            updateDateDisplay();
+            loadDataForCurrentDate();
+            
+            // Hide date picker initially
+            datePickerEl.style.display = 'none';
         });
     </script>
 </body>
