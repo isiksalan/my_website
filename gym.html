@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gym tracker 💪</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg">
+    <style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    * {
+        cursor: url('etc/cursor-index.gif'), auto;
+        font-family: 'Press Start 2P', cursive;
+        box-sizing: border-box;
+    }
+
+    *:active {
+        cursor: url('etc/cursor-index.gif'), auto !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #d4a574;
+        background-image: url('backgrounds/back-142.gif');
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+    }
+
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 10px 20px;
+        background-color: rgba(255, 192, 203, 0.9);
+        background-image: url('backgrounds/back-158.gif');
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 100;
+        border-bottom: 3px solid #ff69b4;
+    }
+
+    h1 {
+        font-family: 'Press Start 2P', cursive;
+        font-size: clamp(0.8rem, 3vw, 1.5rem);
+        color: #000000;
+        margin: 0;
+        max-width: 70%;
+        word-wrap: break-word;
+        text-shadow: 8px 8px 0px #fff, 8px 8px 0px rgba(0,0,0,0.2);
+    }
+
+    .header-button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-btn {
+        width: auto;
+        max-width: 120px;
+        height: 40px;
+        padding: 0 15px;
+        font-size: clamp(0.4rem, 1.2vw, 0.7rem);
+        white-space: nowrap;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn {  
+        font-family: 'Press Start 2P', cursive;
+    }  
+
+    .btn-layered-3d {  
+        width: 180px;  
+        position: relative;  
+        display: inline-block;  
+        cursor: pointer;  
+        outline: none;
+        vertical-align: middle;  
+        text-decoration: none;  
+        font-size: 0.9rem;  
+        font-family: 'Press Start 2P', cursive;  
+        font-weight: 600;  
+        text-transform: uppercase;  
+        padding: 0.8em 1.5em;  
+        border-radius: 10px;  
+        background: linear-gradient(to bottom, #ffc0cb, #ff69b4);
+        border: 3px solid;
+        border-color: #fff #c71585 #c71585 #fff;
+        color: #800080;
+        text-shadow: 1px 1px 0px rgba(255,255,255,0.6);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            3px 3px 5px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+        transition: all 0.2s ease;
+    }
+
+    .btn-layered-3d:hover {
+        background: linear-gradient(to bottom, #ffb6c1, #ff1493);
+        transform: translateY(-2px);
+        box-shadow: 
+            0px 0px 0px 1px rgba(0,0,0,0.2),
+            4px 4px 8px rgba(0,0,0,0.3),
+            inset 0px 1px 1px rgba(255,255,255,0.9);
+    } 
+    
+    .btn-layered-3d:active {
+        background: linear-gradient(to bottom, #ff69b4, #c71585);
+        border-color: #c71585 #fff #fff #c71585;
+        transform: translateY(3px);
+    }
+
+    .btn-layered-3d--pink {
+        background: linear-gradient(to bottom, #ffc0cb, #ff69b4);
+        color: #800080;
+        border-color: #fff #c71585 #c71585 #fff;
+    }  
+
+    .btn-layered-3d--pink:hover {
+        background: linear-gradient(to bottom, #ffb6c1, #ff1493);
+    }
+    
+    .btn-layered-3d--pink:active {
+        background: linear-gradient(to bottom, #ff69b4, #c71585);
+        border-color: #c71585 #fff #fff #c71585;
+    }
+
+    .content-wrapper {
+        padding-top: 80px;
+        padding-bottom: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gym-counter-container {
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .gym-counter-title {
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
+        color: #ff1493;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
+    }
+
+    .gym-counter-display {
+        font-size: clamp(1.5rem, 4vw, 3rem);
+        color: #ffffff;
+        text-shadow: 3px 3px 0px #ffc0cb;
+        margin: 10px 0;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .table-container {
+        background: #800080;
+        background-image: url('backgrounds/back-158.gif');
+        background-repeat: repeat;
+        background-size: auto;
+        background-position: center;
+        border-radius: 2%;
+        width: 90%;
+        max-width: 1200px;
+        padding: 40px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        margin-bottom: 40px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: clamp(0.5rem, 1vw, 0.8rem);
+    }
+
+    thead {
+        background: linear-gradient(to bottom, #ff69b4, #ff1493);
+    }
+
+    th {
+        padding: 12px 8px;
+        text-align: left;
+        color: white;
+        border: 2px solid #c71585;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    }
+
+    td {
+        padding: 10px 8px;
+        border: 2px solid #ffc0cb;
+        color: #333;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: rgba(255, 240, 245, 0.8);
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: rgba(255, 228, 225, 0.8);
+    }
+
+    tbody tr:hover {
+        background-color: rgba(255, 192, 203, 0.9);
+        transform: scale(1.02);
+        transition: all 0.2s ease;
+    }
+
+    .gym-day {
+        background-color: #f3f2a8 !important;
+        font-weight: bold;
+    }
+
+    .rest-day {
+        background-color: #ffffff !important;
+    }
+
+    @media (max-width: 768px) {
+        .header-container {
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        h1 {
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+
+        table {
+            font-size: 0.6rem;
+        }
+
+        th, td {
+            padding: 6px 4px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>GYM TRACKER 2025 </h1>
+        <div class="header-button-container">
+            <button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
+                Home
+            </button>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="gym-counter-container">
+            <img src="gifs/man_workinng_out.gif" style="width: 224px; height: auto;">
+            <h2 class="gym-counter-title">Days at the Gym</h2>
+            <div class="gym-counter-display" id="gym-counter">0</div>
+        </div>
+
+        <div class="table-container">
+            <table id="workout-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Gym</th>
+                        <th>Focus</th>
+                        <th>Notes / Exercises</th>
+                    </tr>
+                </thead>
+                <tbody id="workout-tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const data = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                
+                const values = [];
+                let current = '';
+                let inQuotes = false;
+                
+                for (let char of line) {
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                values.push(current.trim());
+                
+                if (values[0] && values[0] !== '' && !isNaN(values[0])) {
+                    data.push({
+                        day: parseInt(values[0]),
+                        gym: parseInt(values[1]),
+                        focus: values[2] || '',
+                        notes: values[3] || ''
+                    });
+                }
+            }
+            
+            return data;
+        }
+
+        async function loadWorkoutData() {
+            try {
+                const response = await fetch('data/Workout_Progress_2025.csv');
+                const csvText = await response.text();
+                const workoutData = parseCSV(csvText);
+                populateTable(workoutData);
+            } catch (error) {
+                console.error('Error loading workout data:', error);
+                document.getElementById('workout-tbody').innerHTML = 
+                    '<tr><td colspan="4" style="text-align: center; color: #ff1493;">Error loading workout data. Please make sure Workout_Progress_2025.csv is in the data folder.</td></tr>';
+            }
+        }
+
+        function populateTable(workoutData) {
+            const tbody = document.getElementById('workout-tbody');
+            tbody.innerHTML = '';
+            let gymDaysCount = 0;
+
+            workoutData.forEach(workout => {
+                const row = document.createElement('tr');
+                
+                if (workout.gym === 1) {
+                    gymDaysCount++;
+                    row.className = 'gym-day';
+                } else {
+                    row.className = 'rest-day';
+                }
+
+                row.innerHTML = `
+                    <td><strong>${workout.day}</strong></td>
+                    <td><strong>${workout.gym === 1 ? '<img src="gifs/happy.gif" style="width: 24px; height: auto;">' : 'no'}</strong></td>
+                    <td>${workout.focus}</td>
+                    <td>${workout.notes}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+
+            document.getElementById('gym-counter').textContent = gymDaysCount;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWorkoutData();
+        });
+    </script>
+</body>
+</html>

@@ -132,6 +132,75 @@ h1 {
     background 0.15s ease-out;
 }  
 
+/* Add these styles to your existing styles.css file */
+
+/* Construction joke container - keeps things aligned */
+.construction-joke-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+/* Body joke styling - horizontal layout with arrow */
+.body-joke {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Arrow pointing to the joke */
+.arrow {
+    font-size: 24px;
+    color: #ff0008;
+    animation: pointRight 1s ease-in-out infinite;
+}
+
+@keyframes pointRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
+/* Joke text styling */
+.joke-text {
+    font-family: 'Press Start 2P', cursive;
+    font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+    color: #ff0008;
+    text-shadow: 2px 2px 0px rgb(255, 250, 250);
+}
+
+/* Body/gym GIF styling - clickable */
+.body-gif {
+    width: 34px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.gym-gif {
+    width: 34px;
+    height: auto;
+}
+
+.body-gif:hover {
+    transform: scale(1.15) rotate(5deg);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .body-joke {
+        gap: 8px;
+    }
+    
+    .arrow {
+        font-size: 20px;
+    }
+    
+    .body-gif {
+        width: 48px;
+    }
+}
+
 .btn-layered-3d::before {  
     position: absolute;  
     content: "";  
