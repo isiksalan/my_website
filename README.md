@@ -15,6 +15,8 @@ This website is a personal playground for me :)
 │   ├── 📄 to-do.html
 │   ├── 📄 quit-smoking.html
 │   └── 📄 my_babes.html
+│   └── 📄 gym.html
+│   └── 📄 pomodoro.html
 │
 └── 📁 assets
     ├── 📁 images
@@ -29,10 +31,11 @@ This website is a personal playground for me :)
 * **to-do.html**: A to-do list tracker with local storage
 * **quit-smoking.html**: Tracks days since quitting smoking with visual cigarette butt counters and you can celebrate my achievement
 * **my_babes.html**: ehe
+* **gym.html**: used to be gym tracker but im fat now
+* **pomodoro.html**: my own pomodoro timer
 
 ##  Easter Eggs
-Type 666 during the Tetris game for a surprise
-
+Type 666 during the Tetris game
 
 🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️🔨🛠️
 ---
