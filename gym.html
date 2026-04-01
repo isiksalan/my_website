@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gym tracker 💪</title>
+    <title>gym tracker</title>
     <link rel="icon" href="images/logo.svg" type="image/svg">
     <style>
     
@@ -139,7 +139,7 @@
     }
 
     .content-wrapper {
-        padding-top: 80px;
+        padding-top: 100px;
         padding-bottom: 40px;
         width: 100%;
         display: flex;
@@ -147,91 +147,88 @@
         align-items: center;
     }
 
-    .gym-counter-container {
+    .tracker-container {
         max-width: 500px;
         width: 90%;
         text-align: center;
-    }
-
-    .gym-counter-title {
-        font-size: clamp(0.8rem, 2vw, 1.2rem);
-        color: #ff1493;
-        margin-bottom: 15px;
-        text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
-    }
-
-    .gym-counter-display {
-        font-size: clamp(1.5rem, 4vw, 3rem);
-        color: #ffffff;
-        text-shadow: 3px 3px 0px #ffc0cb;
-        margin: 10px 0;
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-
-    .table-container {
-        background: #800080;
-        background-image: url('backgrounds/back-158.gif');
-        background-repeat: repeat;
-        background-size: auto;
-        background-position: center;
-        border-radius: 2%;
-        width: 90%;
-        max-width: 1200px;
+        background: linear-gradient(135deg, rgba(40,40,40,0.95), rgba(20,20,20,0.95));
+        border-radius: 5px;
         padding: 40px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        margin-bottom: 40px;
+        margin: 20px;
+        box-shadow: 
+            0 8px 32px rgba(0,0,0,0.5),
+            inset 0 1px 1px rgba(255,255,255,0.1);
+        border: 3px solid #444;
     }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: clamp(0.5rem, 1vw, 0.8rem);
+    .tracker-title {
+        font-size: clamp(0.7rem, 2vw, 1rem);
+        color: #ff69b4;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
 
-    thead {
-        background: linear-gradient(to bottom, #ff69b4, #ff1493);
+    .main-counter-label {
+        font-size: clamp(0.5rem, 1.2vw, 0.7rem);
+        color: #888;
+        margin-bottom: 10px;
+        text-transform: uppercase;
     }
 
-    th {
-        padding: 12px 8px;
-        text-align: left;
-        color: white;
-        border: 2px solid #c71585;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    .main-counter {
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        color: #00ff00;
+        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+        margin: 15px 0;
+        font-family: 'Press Start 2P', cursive;
     }
 
-    td {
-        padding: 10px 8px;
-        border: 2px solid #ffc0cb;
-        color: #333;
+    .counter-unit {
+        font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+        color: #666;
+        margin-top: 5px;
     }
 
-    tbody tr:nth-child(odd) {
-        background-color: rgba(255, 240, 245, 0.8);
+    .divider {
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, #444, transparent);
+        margin: 30px auto;
     }
 
-    tbody tr:nth-child(even) {
-        background-color: rgba(255, 228, 225, 0.8);
+    .snack-section {
+        margin-top: 20px;
     }
 
-    tbody tr:hover {
-        background-color: rgba(255, 192, 203, 0.9);
-        transform: scale(1.02);
-        transition: all 0.2s ease;
+    .snack-label {
+        font-size: clamp(0.45rem, 1vw, 0.6rem);
+        color: #666;
+        margin-bottom: 10px;
+        text-transform: uppercase;
     }
 
-    .gym-day {
-        background-color: #f3f2a8 !important;
-        font-weight: bold;
+    .snack-counter {
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+        color: #ffcc00;
+        text-shadow: 0 0 8px #ffcc00;
+        font-family: 'Press Start 2P', cursive;
     }
 
-    .rest-day {
-        background-color: #ffffff !important;
+    .status-text {
+        font-size: clamp(0.4rem, 0.9vw, 0.55rem);
+        color: #555;
+        margin-top: 30px;
+        line-height: 1.8;
+    }
+
+    .blink {
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
     }
 
     @media (max-width: 768px) {
@@ -245,19 +242,15 @@
             margin-bottom: 10px;
         }
 
-        table {
-            font-size: 0.6rem;
-        }
-
-        th, td {
-            padding: 6px 4px;
+        .tracker-container {
+            padding: 25px;
         }
     }
     </style>
 </head>
 <body>
     <div class="header-container">
-        <h1>GYM TRACKER 2025 </h1>
+        <h1>GYM TRACKER</h1>
         <div class="header-button-container">
             <button class="btn btn-layered-3d btn-layered-3d--pink header-btn" onclick="window.location.href='index.html'">
                 Home
@@ -266,109 +259,56 @@
     </div>
 
     <div class="content-wrapper">
-        <div class="gym-counter-container">
-            <img src="gifs/man_workinng_out.gif" style="width: 224px; height: auto;">
-            <h2 class="gym-counter-title">Days at the Gym</h2>
-            <div class="gym-counter-display" id="gym-counter">0</div>
-        </div>
-
-        <div class="table-container">
-            <table id="workout-table">
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Gym</th>
-                        <th>Focus</th>
-                        <th>Notes / Exercises</th>
-                    </tr>
-                </thead>
-                <tbody id="workout-tbody">
-                </tbody>
-            </table>
+        <div class="tracker-container">
+            
+            <h2 class="tracker-title">status: inactive</h2>
+            
+            <p class="main-counter-label">days since i last saw the inside of a gym</p>
+            <div class="main-counter" id="days-counter">0</div>
+            <p class="counter-unit">days</p>
+            
+            <div class="divider"></div>
+            
+            <div class="snack-section">
+                <p class="snack-label">snacks consumed in that time</p>
+                <div class="snack-counter" id="snack-counter">0</div>
+            </div>
+            
+            <p class="status-text">
+                gym membership: expired<span class="blink">_</span>
+            </p>
+            
         </div>
     </div>
 
     <script>
-        function parseCSV(csv) {
-            const lines = csv.trim().split('\n');
-            const data = [];
-            
-            for (let i = 1; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (!line) continue;
-                
-                const values = [];
-                let current = '';
-                let inQuotes = false;
-                
-                for (let char of line) {
-                    if (char === '"') {
-                        inQuotes = !inQuotes;
-                    } else if (char === ',' && !inQuotes) {
-                        values.push(current.trim());
-                        current = '';
-                    } else {
-                        current += char;
-                    }
-                }
-                values.push(current.trim());
-                
-                if (values[0] && values[0] !== '' && !isNaN(values[0])) {
-                    data.push({
-                        day: parseInt(values[0]),
-                        gym: parseInt(values[1]),
-                        focus: values[2] || '',
-                        notes: values[3] || ''
-                    });
-                }
-            }
-            
-            return data;
-        }
-
-        async function loadWorkoutData() {
-            try {
-                const response = await fetch('data/Workout_Progress_2025.csv');
-                const csvText = await response.text();
-                const workoutData = parseCSV(csvText);
-                populateTable(workoutData);
-            } catch (error) {
-                console.error('Error loading workout data:', error);
-                document.getElementById('workout-tbody').innerHTML = 
-                    '<tr><td colspan="4" style="text-align: center; color: #ff1493;">Error loading workout data. Please make sure Workout_Progress_2025.csv is in the data folder.</td></tr>';
-            }
-        }
-
-        function populateTable(workoutData) {
-            const tbody = document.getElementById('workout-tbody');
-            tbody.innerHTML = '';
-            let gymDaysCount = 0;
-
-            workoutData.forEach(workout => {
-                const row = document.createElement('tr');
-                
-                if (workout.gym === 1) {
-                    gymDaysCount++;
-                    row.className = 'gym-day';
-                } else {
-                    row.className = 'rest-day';
-                }
-
-                row.innerHTML = `
-                    <td><strong>${workout.day}</strong></td>
-                    <td><strong>${workout.gym === 1 ? '<img src="gifs/happy.gif" style="width: 24px; height: auto;">' : 'no'}</strong></td>
-                    <td>${workout.focus}</td>
-                    <td>${workout.notes}</td>
-                `;
-
-                tbody.appendChild(row);
-            });
-
-            document.getElementById('gym-counter').textContent = gymDaysCount;
-        }
-
         document.addEventListener('DOMContentLoaded', function() {
-            loadWorkoutData();
+            // Set the date you stopped going to gym
+            const lastGymDate = new Date(2025, 2, 15); // March 15, 2025
+            
+            function calculateDaysSinceGym() {
+                const now = new Date();
+                const timeDiff = now - lastGymDate;
+                return Math.max(0, Math.floor(timeDiff / (1000 * 60 * 60 * 24)));
+            }
+            
+            function updateCounter() {
+                const daysSince = calculateDaysSinceGym();
+                document.getElementById('days-counter').textContent = daysSince;
+                
+                // Calculate realistic snack count (approx 3-4 snacks per day)
+                const baseSnacks = daysSince * 3;
+                document.getElementById('snack-counter').textContent = baseSnacks;
+            }
+            
+            updateCounter();
+            
+            // Slowly increment snack counter (every 30 seconds)
+            setInterval(() => {
+                const snackEl = document.getElementById('snack-counter');
+                const current = parseInt(snackEl.textContent);
+                snackEl.textContent = current + 1;
+            }, 30000);
         });
     </script>
 </body>
