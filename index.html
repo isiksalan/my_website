@@ -8,11 +8,99 @@
     <link rel="icon" href="images/logo.gif" type="image/gif">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Floating Watch Widget */
+        .floating-watch {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-watch:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .floating-watch a {
+            display: block;
+        }
+
+        .floating-watch img {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Optional: tooltip on hover */
+        .floating-watch::after {
+            content: 'pomodoro~';
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.5rem;
+            padding: 6px 10px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 2px solid #c71585;
+            box-shadow: 0 3px 0 #8b0a50;
+        }
+
+        .floating-watch:hover::after {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        /* Sparkle effect around watch */
+        .floating-watch::before {
+            content: '✦';
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            font-size: 1rem;
+            color: #ffcc00;
+            text-shadow: 0 0 10px #ffcc00;
+            animation: twinkle 1.5s infinite alternate;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            .floating-watch {
+                bottom: 15px;
+                right: 15px;
+            }
+            .floating-watch img {
+                width: 60px;
+            }
+            .floating-watch::after {
+                font-size: 0.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="header-container">
         <h1>i am genuinely depressed </h1>
         <!-- i think there is a better way than just using a href ** I WILL COME BACK TO THIS PART ** FLAG -->
+         
         <a href="quit.html" class="quit-link">
             <img src="gifs/nosmoking.gif" alt="Quit Smoking" class="quit-icon">
         </a>
@@ -53,7 +141,7 @@
             <span class="button-star">★★★★</span>
         </div>
     </div>
-
+        
     <div class="simple-text-wrapper">
         <div class="simple-text-container">
             <p class="simple-text">`This site is currently under construction :)) .`</p>
@@ -80,5 +168,13 @@
             <img src="gifs/player1.gif" alt="game enter">
         </a>
     </div>
+
+    <!-- Floating Watch Widget - always visible! -->
+    <div class="floating-watch">
+        <a href="pomodoro.html">
+            <img src="gifs/watch.gif" alt="Pomodoro Timer">
+        </a>
+    </div>
+
 </body>
 </html>
